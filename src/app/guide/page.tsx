@@ -26,7 +26,7 @@ import {
 
 // ============ PLATFORM DATA ============
 
-const MANGAYOMI_SYSTEM = [
+const MANGAYOMI_SYSTEM: { name: string; icon: string; color: string; types: string[]; note?: string; platforms: string[] }[] = [
   {
     name: 'Mangayomi',
     icon: 'https://raw.githubusercontent.com/kodjodevf/mangayomi/main/assets/app_icons/icon-red.png',
