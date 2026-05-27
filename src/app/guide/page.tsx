@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import {
   Accordion,
   AccordionContent,
@@ -19,7 +18,6 @@ import {
   BookOpen,
   Film,
   Tv,
-  Settings,
   Package,
   Copy,
   Plus,
@@ -320,8 +318,8 @@ export default function GuidePage() {
           </div>
 
           <div className="flex items-center gap-2 mt-1.5 px-1">
-            <Badge variant="outline" className="text-[9px] bg-violet-500/10 text-violet-400 border-violet-500/20">Android → APK</Badge>
-            <Badge variant="outline" className="text-[9px] bg-emerald-500/10 text-emerald-400 border-emerald-500/20">Desktop → JAR</Badge>
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-medium bg-violet-500/10 text-violet-400 border border-violet-500/20">Android → APK</span>
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Desktop → JAR</span>
           </div>
 
           <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
