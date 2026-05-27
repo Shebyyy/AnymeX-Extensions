@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import {
   Accordion,
   AccordionContent,
@@ -520,29 +519,27 @@ export default function GuidePage() {
 
           {/* Bottom nav */}
           <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/[0.06]">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setActiveSection(Math.max(0, activeSection - 1))}
-              disabled={activeSection === 0}
-              className="text-gray-500 hover:text-white text-sm"
-            >
-              ← Previous
-            </Button>
+            {activeSection > 0 ? (
+              <button
+                onClick={() => setActiveSection(activeSection - 1)}
+                className="inline-flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all outline-none focus:ring-0"
+              >
+                ← Previous
+              </button>
+            ) : <div />}
             <div className="flex items-center gap-1.5">
               {sections.map((_, i) => (
                 <div key={i} className={`w-2 h-2 rounded-full transition-all ${i === activeSection ? 'bg-white w-5' : 'bg-white/20'}`} />
               ))}
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setActiveSection(Math.min(sections.length - 1, activeSection + 1))}
-              disabled={activeSection === sections.length - 1}
-              className="text-gray-500 hover:text-white text-sm"
-            >
-              Next →
-            </Button>
+            {activeSection < sections.length - 1 ? (
+              <button
+                onClick={() => setActiveSection(activeSection + 1)}
+                className="inline-flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all outline-none focus:ring-0"
+              >
+                Next →
+              </button>
+            ) : <div />}
           </div>
         </div>
 
