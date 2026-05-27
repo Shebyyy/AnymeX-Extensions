@@ -113,9 +113,9 @@ export default function GuidePage() {
       name: 'Android',
       icon: <Smartphone className="w-5 h-5" />,
       builds: [
-        { label: 'arm64 (Most phones)', href: `${DL}?channel=${channel}&platform=android-arm64` },
-        { label: 'x86_64 (Emulators)', href: `${DL}?channel=${channel}&platform=android-x86_64` },
-        { label: 'Universal (All devices)', href: `${DL}?channel=${channel}&platform=android-universal` },
+        { label: 'AnymeX-arm64-v8a.apk (Most phones)', href: `${DL}?channel=${channel}&platform=android-arm64` },
+        { label: 'AnymeX-x86_64.apk (Emulators)', href: `${DL}?channel=${channel}&platform=android-x86_64` },
+        { label: 'AnymeX-universal.apk (All devices)', href: `${DL}?channel=${channel}&platform=android-universal` },
       ],
     },
     {
@@ -123,7 +123,7 @@ export default function GuidePage() {
       name: 'iOS',
       icon: <Apple className="w-5 h-5" />,
       builds: [
-        { label: '.ipa (sideload)', href: `${DL}?channel=${channel}&platform=ios` },
+        { label: 'AnymeX.ipa (sideload)', href: `${DL}?channel=${channel}&platform=ios` },
       ],
     },
     {
@@ -131,8 +131,8 @@ export default function GuidePage() {
       name: 'Windows',
       icon: <Monitor className="w-5 h-5" />,
       builds: [
-        { label: 'Portable (.zip)', href: `${DL}?channel=${channel}&platform=windows-zip` },
-        { label: 'Installer (.exe)', href: `${DL}?channel=${channel}&platform=windows-installer` },
+        { label: 'AnymeX-Windows.zip (Portable)', href: `${DL}?channel=${channel}&platform=windows-zip` },
+        { label: 'AnymeX-Installer.exe', href: `${DL}?channel=${channel}&platform=windows-installer` },
       ],
     },
     {
@@ -140,7 +140,7 @@ export default function GuidePage() {
       name: 'macOS',
       icon: <Monitor className="w-5 h-5" />,
       builds: [
-        { label: '.dmg', href: `${DL}?channel=${channel}&platform=macos` },
+        { label: 'AnymeX.dmg', href: `${DL}?channel=${channel}&platform=macos` },
       ],
     },
     {
@@ -148,9 +148,9 @@ export default function GuidePage() {
       name: 'Linux',
       icon: <Monitor className="w-5 h-5" />,
       builds: [
-        { label: 'AppImage', href: `${DL}?channel=${channel}&platform=linux-appimage` },
-        { label: '.rpm', href: `${DL}?channel=${channel}&platform=linux-rpm` },
-        { label: '.zip', href: `${DL}?channel=${channel}&platform=linux-zip` },
+        { label: 'AnymeX-Linux.AppImage', href: `${DL}?channel=${channel}&platform=linux-appimage` },
+        { label: 'AnymeX-Linux.rpm', href: `${DL}?channel=${channel}&platform=linux-rpm` },
+        { label: 'AnymeX-Linux.zip', href: `${DL}?channel=${channel}&platform=linux-zip` },
       ],
     },
   ]
