@@ -61,7 +61,7 @@ const PLUGIN_SYSTEM = [
   },
 ]
 
-const SORA_SYSTEM = [
+const SORA_SYSTEM: { name: string; icon: string; color: string; types: string[]; note?: string; platforms: string[] }[] = [
   {
     name: 'Sora',
     icon: 'https://static.everythingmoe.com/icons/sora.png',
@@ -101,6 +101,59 @@ function NoIOSBadge() {
 
 export default function GuidePage() {
   const [activeSection, setActiveSection] = useState(0)
+  const [useBeta, setUseBeta] = useState(false)
+  const [expandedPlatform, setExpandedPlatform] = useState<string | null>(null)
+
+  const DL = '/api/download'
+  const channel = useBeta ? 'beta' : 'stable'
+
+  const platforms = [
+    {
+      id: 'android',
+      name: 'Android',
+      icon: <Smartphone className="w-5 h-5" />,
+      builds: [
+        { label: 'arm64 (Most phones)', href: `${DL}?channel=${channel}&platform=android-arm64` },
+        { label: 'x86_64 (Emulators)', href: `${DL}?channel=${channel}&platform=android-x86_64` },
+        { label: 'Universal (All devices)', href: `${DL}?channel=${channel}&platform=android-universal` },
+      ],
+    },
+    {
+      id: 'ios',
+      name: 'iOS',
+      icon: <Apple className="w-5 h-5" />,
+      builds: [
+        { label: '.ipa (sideload)', href: `${DL}?channel=${channel}&platform=ios` },
+      ],
+    },
+    {
+      id: 'windows',
+      name: 'Windows',
+      icon: <Monitor className="w-5 h-5" />,
+      builds: [
+        { label: 'Portable (.zip)', href: `${DL}?channel=${channel}&platform=windows-zip` },
+        { label: 'Installer (.exe)', href: `${DL}?channel=${channel}&platform=windows-installer` },
+      ],
+    },
+    {
+      id: 'macos',
+      name: 'macOS',
+      icon: <Monitor className="w-5 h-5" />,
+      builds: [
+        { label: '.dmg', href: `${DL}?channel=${channel}&platform=macos` },
+      ],
+    },
+    {
+      id: 'linux',
+      name: 'Linux',
+      icon: <Monitor className="w-5 h-5" />,
+      builds: [
+        { label: 'AppImage', href: `${DL}?channel=${channel}&platform=linux-appimage` },
+        { label: '.rpm', href: `${DL}?channel=${channel}&platform=linux-rpm` },
+        { label: '.zip', href: `${DL}?channel=${channel}&platform=linux-zip` },
+      ],
+    },
+  ]
 
   const sections = [
     {
@@ -111,20 +164,67 @@ export default function GuidePage() {
       content: (
         <div className="space-y-4">
           <p className="text-sm sm:text-base text-gray-400">Download and install AnymeX on your device.</p>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-            {[
-              { name: 'Android', icon: <Smartphone className="w-6 h-6" /> },
-              { name: 'iOS', icon: <Apple className="w-6 h-6" /> },
-              { name: 'Windows', icon: <Monitor className="w-6 h-6" /> },
-              { name: 'Linux', icon: <Monitor className="w-6 h-6" /> },
-              { name: 'macOS', icon: <Monitor className="w-6 h-6" /> },
-            ].map(p => (
-              <div key={p.name} className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-                <div className="text-gray-400">{p.icon}</div>
-                <span className="text-sm font-medium text-gray-300">{p.name}</span>
+
+          {/* Stable / Beta toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => { setUseBeta(false); setExpandedPlatform(null) }}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${!useBeta ? 'bg-white/10 text-white border border-white/15' : 'text-gray-500 hover:text-gray-300'}`}
+            >
+              Stable
+            </button>
+            <button
+              onClick={() => { setUseBeta(true); setExpandedPlatform(null) }}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${useBeta ? 'bg-amber-500/15 text-amber-400 border border-amber-500/25' : 'text-gray-500 hover:text-gray-300'}`}
+            >
+              Beta
+            </button>
+            <a
+              href={useBeta ? 'https://github.com/Shebyyy/AnymeX-Preview/releases/latest' : 'https://github.com/RyanYuuki/AnymeX/releases/latest'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto text-xs text-gray-500 hover:text-gray-300 transition-colors"
+            >
+              All releases →
+            </a>
+          </div>
+
+          {/* Platform cards */}
+          <div className="space-y-2">
+            {platforms.map(p => (
+              <div key={p.id}>
+                <button
+                  onClick={() => setExpandedPlatform(expandedPlatform === p.id ? null : p.id)}
+                  className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all ${
+                    expandedPlatform === p.id
+                      ? 'bg-white/[0.06] border-white/15'
+                      : 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1]'
+                  }`}
+                >
+                  <div className="text-gray-400">{p.icon}</div>
+                  <span className="text-sm font-semibold text-gray-300 flex-1 text-left">{p.name}</span>
+                  <ChevronRight className={`w-4 h-4 text-gray-500 transition-transform ${expandedPlatform === p.id ? 'rotate-90' : ''}`} />
+                </button>
+                {expandedPlatform === p.id && (
+                  <div className="mt-1.5 space-y-1.5 pl-2">
+                    {p.builds.map((b, i) => (
+                      <a
+                        key={i}
+                        href={b.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.06] hover:border-white/[0.1] transition-all group"
+                      >
+                        <Download className="w-3.5 h-3.5 text-gray-500 group-hover:text-emerald-400 transition-colors" />
+                        <span className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors">{b.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
+
           <div className="p-4 rounded-lg bg-white/[0.03] border border-white/[0.06]">
             <p className="text-xs sm:text-sm text-gray-400">
               On first launch: grant <strong className="text-white">Storage</strong> &amp; <strong className="text-white">Install</strong> permissions (Android), select your tracking service (AniList/MAL/Simkl).
