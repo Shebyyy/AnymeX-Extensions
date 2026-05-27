@@ -433,37 +433,16 @@ export default function GuidePage() {
     },
     {
       id: 'done',
-      title: 'Start Using Extensions',
+      title: 'All Done!',
       icon: <Check className="w-4 h-4" />,
       color: 'text-emerald-400',
       content: (
-        <div className="space-y-4">
-          <div className="flex items-center justify-center py-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center">
-              <Check className="w-8 h-8 text-emerald-400" />
-            </div>
+        <div className="flex flex-col items-center justify-center py-8 gap-4">
+          <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/25 flex items-center justify-center">
+            <Check className="w-10 h-10 text-emerald-400" />
           </div>
-          <p className="text-sm text-gray-400 text-center">You&apos;re all set! Here&apos;s how to start using your extensions.</p>
-
-          <div className="space-y-2">
-            {[
-              'Go to the <strong class="text-white">Extensions</strong> tab in AnymeX',
-              'Switch to the <strong class="text-white">Installed</strong> tab to see your extensions',
-              'Switch your <strong class="text-white">service mode to Extensions</strong> using the service selector',
-              'Search for anime/manga/novels using your installed extensions',
-            ].map((step, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-                <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-[10px] font-bold text-gray-300">{i + 1}</div>
-                <p className="text-xs font-medium text-gray-300" dangerouslySetInnerHTML={{ __html: step }} />
-              </div>
-            ))}
-          </div>
-
-          <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.08]">
-            <p className="text-[11px] text-gray-400">
-              <strong className="text-white">Tips:</strong> Extensions auto-check for updates. You can configure extension settings, reorder, or uninstall from the Installed tab.
-            </p>
-          </div>
+          <p className="text-lg font-semibold text-white">You&apos;re all set!</p>
+          <p className="text-sm text-gray-400 text-center max-w-sm">Go enjoy anime, manga &amp; novels. Extensions auto-check for updates so you don&apos;t have to worry about that.</p>
         </div>
       ),
     },
