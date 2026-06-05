@@ -15,6 +15,15 @@ import {
   Copy,
   BookOpen,
   ExternalLink,
+  User,
+  Settings,
+  RefreshCw,
+  ArrowDown,
+  MousePointerClick,
+  ClipboardList,
+  Film,
+  Tv2,
+  CheckCircle2,
 } from 'lucide-react'
 
 // ============ TYPES ============
@@ -25,7 +34,7 @@ interface Step {
   id: string
   title: string
   icon: React.ReactNode
-  breadcrumbs?: { label: string; icon?: string }[]
+  breadcrumbs?: { label: string; icon?: React.ReactNode }[]
   instruction: string
   details?: React.ReactNode
   tip?: string
@@ -108,12 +117,12 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
       title: 'Install Plugin',
       icon: <Plug className="w-5 h-5" />,
       breadcrumbs: [
-        { label: 'Profile', icon: 'ðŸ‘¤' },
-        { label: 'Settings', icon: 'âš™ï¸' },
-        { label: 'Extensions', icon: 'ðŸ“¦' },
-        { label: 'âš™ï¸ (top right)', icon: '' },
-        { label: 'Download Plugin', icon: 'â¬‡ï¸' },
-        { label: 'Restart App', icon: 'ðŸ”„' },
+        { label: 'Profile', icon: <User className="w-3.5 h-3.5" /> },
+        { label: 'Settings', icon: <Settings className="w-3.5 h-3.5" /> },
+        { label: 'Extensions', icon: <Package className="w-3.5 h-3.5" /> },
+        { label: 'Settings (top right)', icon: <Settings className="w-3.5 h-3.5" /> },
+        { label: 'Download Plugin', icon: <ArrowDown className="w-3.5 h-3.5" /> },
+        { label: 'Restart App', icon: <RefreshCw className="w-3.5 h-3.5" /> },
       ],
       instruction: 'Install the Runtime Bridge Plugin to unlock Aniyomi & CloudStream extensions.',
       details: (
@@ -135,13 +144,13 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
     title: 'Add Repository',
     icon: <Copy className="w-5 h-5" />,
     breadcrumbs: [
-      { label: 'Profile', icon: 'ðŸ‘¤' },
-      { label: 'Settings', icon: 'âš™ï¸' },
-      { label: 'Extensions', icon: 'ðŸ“¦' },
-      { label: 'Select System & Type', icon: '' },
-      { label: '+ Add Repo', icon: '' },
-      { label: 'Paste URL', icon: '' },
-      { label: 'Add Repository', icon: '' },
+      { label: 'Profile', icon: <User className="w-3.5 h-3.5" /> },
+      { label: 'Settings', icon: <Settings className="w-3.5 h-3.5" /> },
+      { label: 'Extensions', icon: <Package className="w-3.5 h-3.5" /> },
+      { label: 'Select System & Type' },
+      { label: '+ Add Repo' },
+      { label: 'Paste URL' },
+      { label: 'Add Repository' },
     ],
     instruction: 'Add extension repos to AnymeX so you can browse and install extensions.',
     details: (
@@ -151,7 +160,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
           {/* Method 1: One-click */}
           <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm">ðŸ‘†</span>
+              <MousePointerClick className="w-4 h-4 text-emerald-400" />
               <span className="text-sm font-semibold text-emerald-300">One-Click</span>
             </div>
             <p className="text-xs text-gray-400">On this site, tap <strong className="text-emerald-400">Install</strong> or <strong className="text-emerald-400">Add Repo</strong>. AnymeX opens and adds it automatically.</p>
@@ -169,7 +178,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
           {/* Method 2: Manual */}
           <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/15">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm">ðŸ“‹</span>
+              <ClipboardList className="w-4 h-4 text-amber-400" />
               <span className="text-sm font-semibold text-amber-300">Manual</span>
             </div>
             <p className="text-xs text-gray-400">Copy the repo URL from this site, then paste it inside AnymeX.</p>
@@ -198,27 +207,27 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
     title: 'Install Extension',
     icon: <Package className="w-5 h-5" />,
     breadcrumbs: [
-      { label: 'Profile', icon: 'ðŸ‘¤' },
-      { label: 'Extensions', icon: 'ðŸ“¦' },
-      { label: 'Available anime/manga/novel', icon: '' },
-      { label: 'Tap â¬‡ï¸ icon', icon: '' },
+      { label: 'Profile', icon: <User className="w-3.5 h-3.5" /> },
+      { label: 'Extensions', icon: <Package className="w-3.5 h-3.5" /> },
+      { label: 'Available anime/manga/novel' },
+      { label: 'Tap download icon', icon: <ArrowDown className="w-3.5 h-3.5" /> },
     ],
     instruction: 'Browse available extensions and install the ones you want.',
     details: (
       <div className="space-y-3">
         <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
           <p className="text-xs text-gray-400">
-            Go to <strong className="text-white">Profile â†’ Extensions</strong>. Under <strong className="text-white">Available</strong> anime/manga/novel, find the extension you want and tap the <strong className="text-white">â¬‡ï¸ download icon</strong>.
+            Go to <strong className="text-white">Profile → Extensions</strong>. Under <strong className="text-white">Available</strong> anime/manga/novel, find the extension you want and tap the <strong className="text-white">download icon</strong>.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            <span className="text-sm">ðŸ“¦</span>
+            <Package className="w-3.5 h-3.5 text-gray-400" />
             <span className="text-xs font-medium text-gray-300">Available</span>
             <ChevronRight className="w-3 h-3 text-gray-600" />
-            <span className="text-sm">â¬‡ï¸</span>
+            <ArrowDown className="w-3.5 h-3.5 text-gray-400" />
             <ChevronRight className="w-3 h-3 text-gray-600" />
-            <span className="text-sm">âœ…</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-xs font-medium text-emerald-400">Installed</span>
           </div>
         </div>
@@ -246,22 +255,22 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
       <div className="space-y-3">
         <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
           <p className="text-xs text-gray-400">
-            Open any anime/manga/novel â†’ Go to the <strong className="text-white">Watch</strong> or <strong className="text-white">Read</strong> tab â†’ Select your installed extension from the list.
+            Open any anime/manga/novel → Go to the <strong className="text-white">Watch</strong> or <strong className="text-white">Read</strong> tab → Select your installed extension from the list.
           </p>
         </div>
         <div className="flex items-center gap-1.5 flex-wrap">
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            <span className="text-sm">ðŸŽ¬</span>
+            <Film className="w-3.5 h-3.5 text-gray-400" />
             <span className="text-xs font-medium text-gray-300">Open anime</span>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-600" />
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            <span className="text-sm">ðŸ“º</span>
+            <Tv2 className="w-3.5 h-3.5 text-gray-400" />
             <span className="text-xs font-medium text-gray-300">Watch tab</span>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-600" />
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-            <span className="text-sm">âœ…</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-xs font-medium text-emerald-400">Select extension</span>
           </div>
         </div>
@@ -274,13 +283,13 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
 
 // ============ BREADCRUMB PATH COMPONENT ============
 
-function BreadcrumbPath({ items }: { items: { label: string; icon?: string }[] }) {
+function BreadcrumbPath({ items }: { items: { label: string; icon?: React.ReactNode }[] }) {
   return (
     <div className="flex items-center gap-1 flex-wrap py-2">
       {items.map((item, i) => (
         <div key={i} className="flex items-center gap-1">
           <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            {item.icon && <span className="text-sm">{item.icon}</span>}
+            {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
             <span className="text-xs font-medium text-gray-300">{item.label}</span>
           </div>
           {i < items.length - 1 && <ChevronRight className="w-3.5 h-3.5 text-gray-600" />}
@@ -460,7 +469,7 @@ function GuideContent() {
                 rel="noopener noreferrer"
                 className="ml-auto text-xs text-gray-500 hover:text-gray-300 transition-colors"
               >
-                All releases â†’
+                All releases →
               </a>
             </div>
 
@@ -551,7 +560,7 @@ function GuideContent() {
                 onClick={() => setCurrentStep(safeStep - 1)}
                 className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
               >
-                â† Back
+                ← Back
               </button>
             ) : <div />}
 
@@ -573,7 +582,7 @@ function GuideContent() {
                 onClick={() => setCurrentStep(safeStep + 1)}
                 className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
               >
-                Next â†’
+                Next →
               </button>
             ) : (
               <div className="flex items-center gap-2">
