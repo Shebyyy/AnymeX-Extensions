@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 export default function Home() {
   useEffect(() => {
-    window.location.replace('/extensions')
+    window.location.replace('/repos')
   }, [])
 
   return (
