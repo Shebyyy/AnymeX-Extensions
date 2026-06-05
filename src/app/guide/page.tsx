@@ -43,84 +43,48 @@ const PLATFORMS: { id: Platform; name: string; icon: React.ReactNode; color: str
 
 // ============ STEP DATA PER PLATFORM ============
 
-function getSteps(platform: Platform): Step[] {
+function getSteps(platform: Platform, useBeta: boolean): Step[] {
   const DL = '/api/download'
+  const channel = useBeta ? 'beta' : 'stable'
 
-  const downloadDetails: Record<Platform, React.ReactNode> = {
-    android: (
+  const getDownloadDetails = (p: Platform): React.ReactNode => {
+    const builds: Record<Platform, { label: string; href: string; note: string; color: string }[]> = {
+      android: [
+        { label: 'AnymeX-arm64-v8a.apk', href: `${DL}?channel=${channel}&platform=android-arm64`, note: 'Most phones', color: 'text-emerald-400 group-hover:text-emerald-300' },
+        { label: 'AnymeX-x86_64.apk', href: `${DL}?channel=${channel}&platform=android-x86_64`, note: 'Emulators', color: 'text-emerald-400 group-hover:text-emerald-300' },
+        { label: 'AnymeX-universal.apk', href: `${DL}?channel=${channel}&platform=android-universal`, note: 'All devices', color: 'text-emerald-400 group-hover:text-emerald-300' },
+      ],
+      ios: [
+        { label: 'AnymeX.ipa', href: `${DL}?channel=${channel}&platform=ios`, note: 'Sideload', color: 'text-gray-300 group-hover:text-white' },
+      ],
+      windows: [
+        { label: 'AnymeX-Windows.zip', href: `${DL}?channel=${channel}&platform=windows-zip`, note: 'Portable', color: 'text-sky-400 group-hover:text-sky-300' },
+        { label: 'AnymeX-Installer.exe', href: `${DL}?channel=${channel}&platform=windows-installer`, note: 'Installer', color: 'text-sky-400 group-hover:text-sky-300' },
+      ],
+      macos: [
+        { label: 'AnymeX.dmg', href: `${DL}?channel=${channel}&platform=macos`, note: 'macOS', color: 'text-violet-400 group-hover:text-violet-300' },
+      ],
+      linux: [
+        { label: 'AnymeX-Linux.AppImage', href: `${DL}?channel=${channel}&platform=linux-appimage`, note: 'AppImage', color: 'text-amber-400 group-hover:text-amber-300' },
+        { label: 'AnymeX-Linux.rpm', href: `${DL}?channel=${channel}&platform=linux-rpm`, note: 'RPM', color: 'text-amber-400 group-hover:text-amber-300' },
+        { label: 'AnymeX-Linux.zip', href: `${DL}?channel=${channel}&platform=linux-zip`, note: 'Portable', color: 'text-amber-400 group-hover:text-amber-300' },
+      ],
+    }
+
+    return (
       <div className="space-y-2">
-        <a href={`${DL}?channel=stable&platform=android-arm64`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-arm64-v8a.apk</span>
-          <span className="text-xs text-gray-600 ml-auto">Most phones</span>
-        </a>
-        <a href={`${DL}?channel=stable&platform=android-x86_64`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-x86_64.apk</span>
-          <span className="text-xs text-gray-600 ml-auto">Emulators</span>
-        </a>
-        <a href={`${DL}?channel=stable&platform=android-universal`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-emerald-400 group-hover:text-emerald-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-universal.apk</span>
-          <span className="text-xs text-gray-600 ml-auto">All devices</span>
-        </a>
+        {builds[p].map((b, i) => (
+          <a key={i} href={b.href} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
+            <Download className={`w-4 h-4 ${b.color}`} />
+            <span className="text-sm text-gray-300 group-hover:text-white">{b.label}</span>
+            <span className="text-xs text-gray-600 ml-auto">{b.note}</span>
+          </a>
+        ))}
       </div>
-    ),
-    ios: (
-      <div className="space-y-2">
-        <a href={`${DL}?channel=stable&platform=ios`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-gray-300 group-hover:text-white" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX.ipa</span>
-          <span className="text-xs text-gray-600 ml-auto">Sideload</span>
-        </a>
-      </div>
-    ),
-    windows: (
-      <div className="space-y-2">
-        <a href={`${DL}?channel=stable&platform=windows-zip`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-sky-400 group-hover:text-sky-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-Windows.zip</span>
-          <span className="text-xs text-gray-600 ml-auto">Portable</span>
-        </a>
-        <a href={`${DL}?channel=stable&platform=windows-installer`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-sky-400 group-hover:text-sky-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-Installer.exe</span>
-          <span className="text-xs text-gray-600 ml-auto">Installer</span>
-        </a>
-      </div>
-    ),
-    macos: (
-      <div className="space-y-2">
-        <a href={`${DL}?channel=stable&platform=macos`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-violet-400 group-hover:text-violet-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX.dmg</span>
-          <span className="text-xs text-gray-600 ml-auto">macOS</span>
-        </a>
-      </div>
-    ),
-    linux: (
-      <div className="space-y-2">
-        <a href={`${DL}?channel=stable&platform=linux-appimage`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-amber-400 group-hover:text-amber-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-Linux.AppImage</span>
-          <span className="text-xs text-gray-600 ml-auto">AppImage</span>
-        </a>
-        <a href={`${DL}?channel=stable&platform=linux-rpm`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-amber-400 group-hover:text-amber-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-Linux.rpm</span>
-          <span className="text-xs text-gray-600 ml-auto">RPM</span>
-        </a>
-        <a href={`${DL}?channel=stable&platform=linux-zip`} className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group">
-          <Download className="w-4 h-4 text-amber-400 group-hover:text-amber-300" />
-          <span className="text-sm text-gray-300 group-hover:text-white">AnymeX-Linux.zip</span>
-          <span className="text-xs text-gray-600 ml-auto">Portable</span>
-        </a>
-      </div>
-    ),
+    )
   }
 
   const needsPlugin = platform !== 'ios'
-  const pluginFileType = platform === 'android' ? 'APK' : 'JAR'
 
   const steps: Step[] = [
     {
@@ -128,7 +92,7 @@ function getSteps(platform: Platform): Step[] {
       title: 'Download & Install',
       icon: <Download className="w-5 h-5" />,
       instruction: 'Download AnymeX for your device and install it.',
-      details: downloadDetails[platform],
+      details: getDownloadDetails(platform),
       tip: platform === 'android'
         ? 'On first launch, grant Storage & Install permissions, then select your tracking service (AniList/MAL/Simkl).'
         : platform === 'ios'
@@ -330,8 +294,9 @@ function BreadcrumbPath({ items }: { items: { label: string; icon?: string }[] }
 export default function GuidePage() {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>('android')
   const [currentStep, setCurrentStep] = useState(0)
+  const [useBeta, setUseBeta] = useState(false)
 
-  const steps = getSteps(selectedPlatform)
+  const steps = getSteps(selectedPlatform, useBeta)
   const totalSteps = steps.length
 
   // Reset step when platform changes
@@ -398,6 +363,34 @@ export default function GuidePage() {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Stable / Beta Toggle */}
+        <div className="mb-6 flex items-center gap-2">
+          <button
+            onClick={() => setUseBeta(false)}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+              !useBeta ? 'bg-white/10 text-white border-white/15' : 'text-gray-500 hover:text-gray-300 border-transparent hover:border-white/[0.06]'
+            }`}
+          >
+            Stable
+          </button>
+          <button
+            onClick={() => setUseBeta(true)}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+              useBeta ? 'bg-amber-500/15 text-amber-400 border-amber-500/25' : 'text-gray-500 hover:text-gray-300 border-transparent hover:border-white/[0.06]'
+            }`}
+          >
+            Beta
+          </button>
+          <a
+            href={useBeta ? 'https://github.com/Shebyyy/AnymeX-Preview/releases/latest' : 'https://github.com/RyanYuuki/AnymeX/releases/latest'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-auto text-xs text-gray-500 hover:text-gray-300 transition-colors"
+          >
+            All releases →
+          </a>
         </div>
 
         {/* Progress Bar */}
