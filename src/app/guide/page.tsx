@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams, usePathname } from 'next/navigation'
 import {
@@ -292,7 +292,7 @@ function BreadcrumbPath({ items }: { items: { label: string; icon?: string }[] }
 
 // ============ MAIN COMPONENT ============
 
-export default function GuidePage() {
+function GuideContent() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
 
@@ -606,5 +606,20 @@ export default function GuidePage() {
         </div>
       </footer>
     </div>
+  )
+}
+
+// ============ SUSPENSE WRAPPER ============
+
+export default function GuidePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#0a0a0f] text-gray-100">
+        <div className="w-8 h-8 border-2 border-white/20 border-t-transparent rounded-full animate-spin" />
+        <p className="text-sm text-gray-500 mt-3">Loading guide...</p>
+      </div>
+    }>
+      <GuideContent />
+    </Suspense>
   )
 }
