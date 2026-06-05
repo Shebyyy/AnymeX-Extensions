@@ -148,6 +148,7 @@ function getSteps(platform: Platform): Step[] {
         { label: 'Extensions', icon: '📦' },
         { label: '⚙️ (top right)', icon: '' },
         { label: 'Download Plugin', icon: '⬇️' },
+        { label: 'Restart App', icon: '🔄' },
       ],
       instruction: 'Install the Runtime Bridge Plugin to unlock Aniyomi & CloudStream extensions.',
       details: (
@@ -157,14 +158,10 @@ function getSteps(platform: Platform): Step[] {
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-sky-500/10 text-sky-400 border border-sky-500/20">Needed for CloudStream</span>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Not needed for Mangayomi/LNReader/Sora</span>
           </div>
-          <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] space-y-2">
-            <p className="text-xs text-gray-400">
-              <strong className="text-white">{pluginFileType}</strong> will be downloaded automatically based on your platform.
-            </p>
-          </div>
+
         </div>
       ),
-      tip: 'Once installed, Aniyomi & CloudStream tabs will appear in your Extensions page.',
+      tip: 'After downloading & installing the plugin, restart the app. Once restarted, Aniyomi & CloudStream tabs will appear in your Extensions page.'
     })
   }
 
