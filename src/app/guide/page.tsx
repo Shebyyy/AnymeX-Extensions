@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { useSearchParams, usePathname } from 'next/navigation'
 import {
   Smartphone,
   Monitor,
@@ -292,12 +293,55 @@ function BreadcrumbPath({ items }: { items: { label: string; icon?: string }[] }
 // ============ MAIN COMPONENT ============
 
 export default function GuidePage() {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>('android')
   const [currentStep, setCurrentStep] = useState(0)
   const [useBeta, setUseBeta] = useState(false)
 
   const steps = getSteps(selectedPlatform, useBeta)
   const totalSteps = steps.length
+
+  // Clamp step if it exceeds total (e.g. switching from Android step 5 to iOS which has 4)
+  const safeStep = Math.min(currentStep, totalSteps - 1)
+  if (safeStep !== currentStep) {
+    setCurrentStep(safeStep)
+  }
+
+  // Read URL params on mount
+  useEffect(() => {
+    const p = searchParams.get('platform')
+    const s = searchParams.get('step')
+    const b = searchParams.get('beta')
+
+    if (p && ['android', 'ios', 'windows', 'macos', 'linux'].includes(p)) {
+      setSelectedPlatform(p as Platform)
+    }
+    if (s) {
+      const stepNum = parseInt(s, 10)
+      if (!isNaN(stepNum) && stepNum >= 1) {
+        setCurrentStep(stepNum - 1)
+      }
+    }
+    if (b === '1') {
+      setUseBeta(true)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Update URL when state changes
+  const updateUrl = useCallback((platform: Platform, step: number, beta: boolean) => {
+    const sp = new URLSearchParams()
+    sp.set('platform', platform)
+    sp.set('step', String(step + 1))
+    if (beta) sp.set('beta', '1')
+    window.history.replaceState(null, '', `${pathname}?${sp.toString()}`)
+  }, [pathname])
+
+  // Sync URL on state change
+  useEffect(() => {
+    updateUrl(selectedPlatform, safeStep, useBeta)
+  }, [selectedPlatform, safeStep, useBeta, updateUrl])
 
   // Reset step when platform changes
   const handlePlatformChange = (p: Platform) => {
@@ -403,14 +447,14 @@ export default function GuidePage() {
                 className="flex-1 group"
               >
                 <div className={`h-1.5 rounded-full transition-all ${
-                  i <= currentStep ? 'bg-emerald-500' : 'bg-white/10'
+                  i <= safeStep ? 'bg-emerald-500' : 'bg-white/10'
                 }`} />
               </button>
             ))}
           </div>
           <div className="flex items-center justify-between">
             <span className="text-xs text-gray-500">
-              Step {currentStep + 1} of {totalSteps}
+              Step {safeStep + 1} of {totalSteps}
             </span>
             {selectedPlatform === 'ios' && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-gray-500/10 text-gray-400 border border-gray-500/20">
@@ -426,58 +470,58 @@ export default function GuidePage() {
           <div className="px-4 sm:px-6 py-4 border-b border-white/[0.06] bg-white/[0.02]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                {steps[currentStep].icon}
+                {steps[safeStep].icon}
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <span className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-xs font-bold text-emerald-400">
-                    {currentStep + 1}
+                    {safeStep + 1}
                   </span>
-                  <h2 className="text-base sm:text-lg font-semibold text-white">{steps[currentStep].title}</h2>
+                  <h2 className="text-base sm:text-lg font-semibold text-white">{steps[safeStep].title}</h2>
                 </div>
-                <p className="text-sm text-gray-400 mt-0.5">{steps[currentStep].instruction}</p>
+                <p className="text-sm text-gray-400 mt-0.5">{steps[safeStep].instruction}</p>
               </div>
             </div>
           </div>
 
           {/* Breadcrumb Path */}
-          {steps[currentStep].breadcrumbs && (
+          {steps[safeStep].breadcrumbs && (
             <div className="px-4 sm:px-6 py-3 border-b border-white/[0.06] bg-white/[0.01]">
               <p className="text-[10px] font-medium text-gray-600 uppercase tracking-wider mb-1.5">Tap Path</p>
-              <BreadcrumbPath items={steps[currentStep].breadcrumbs!} />
+              <BreadcrumbPath items={steps[safeStep].breadcrumbs!} />
             </div>
           )}
 
           {/* Step Details */}
           <div className="px-4 sm:px-6 py-4">
-            {steps[currentStep].details}
+            {steps[safeStep].details}
           </div>
 
           {/* Tip */}
-          {steps[currentStep].tip && (
+          {steps[safeStep].tip && (
             <div className="mx-4 sm:mx-6 mb-4 p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
               <div className="flex items-start gap-2">
                 <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <p className="text-xs text-emerald-400/80">{steps[currentStep].tip}</p>
+                <p className="text-xs text-emerald-400/80">{steps[safeStep].tip}</p>
               </div>
             </div>
           )}
 
           {/* Warning */}
-          {steps[currentStep].warning && (
+          {steps[safeStep].warning && (
             <div className="mx-4 sm:mx-6 mb-4 p-3 rounded-lg bg-red-500/5 border border-red-500/15">
               <div className="flex items-start gap-2">
                 <Apple className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-                <p className="text-xs text-red-400/80">{steps[currentStep].warning}</p>
+                <p className="text-xs text-red-400/80">{steps[safeStep].warning}</p>
               </div>
             </div>
           )}
 
           {/* Step Navigation */}
           <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-t border-white/[0.06]">
-            {currentStep > 0 ? (
+            {safeStep > 0 ? (
               <button
-                onClick={() => setCurrentStep(currentStep - 1)}
+                onClick={() => setCurrentStep(safeStep - 1)}
                 className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
               >
                 ← Back
@@ -491,15 +535,15 @@ export default function GuidePage() {
                   key={i}
                   onClick={() => setCurrentStep(i)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    i === currentStep ? 'bg-emerald-400 w-5' : i < currentStep ? 'bg-emerald-500/40' : 'bg-white/20'
+                    i === safeStep ? 'bg-emerald-400 w-5' : i < safeStep ? 'bg-emerald-500/40' : 'bg-white/20'
                   }`}
                 />
               ))}
             </div>
 
-            {currentStep < totalSteps - 1 ? (
+            {safeStep < totalSteps - 1 ? (
               <button
-                onClick={() => setCurrentStep(currentStep + 1)}
+                onClick={() => setCurrentStep(safeStep + 1)}
                 className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
               >
                 Next →
