@@ -108,12 +108,12 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
       title: 'Install Plugin',
       icon: <Plug className="w-5 h-5" />,
       breadcrumbs: [
-        { label: 'Profile', icon: '👤' },
-        { label: 'Settings', icon: '⚙️' },
-        { label: 'Extensions', icon: '📦' },
-        { label: '⚙️ (top right)', icon: '' },
-        { label: 'Download Plugin', icon: '⬇️' },
-        { label: 'Restart App', icon: '🔄' },
+        { label: 'Profile', icon: 'ðŸ‘¤' },
+        { label: 'Settings', icon: 'âš™ï¸' },
+        { label: 'Extensions', icon: 'ðŸ“¦' },
+        { label: 'âš™ï¸ (top right)', icon: '' },
+        { label: 'Download Plugin', icon: 'â¬‡ï¸' },
+        { label: 'Restart App', icon: 'ðŸ”„' },
       ],
       instruction: 'Install the Runtime Bridge Plugin to unlock Aniyomi & CloudStream extensions.',
       details: (
@@ -135,9 +135,9 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
     title: 'Add Repository',
     icon: <Copy className="w-5 h-5" />,
     breadcrumbs: [
-      { label: 'Profile', icon: '👤' },
-      { label: 'Settings', icon: '⚙️' },
-      { label: 'Extensions', icon: '📦' },
+      { label: 'Profile', icon: 'ðŸ‘¤' },
+      { label: 'Settings', icon: 'âš™ï¸' },
+      { label: 'Extensions', icon: 'ðŸ“¦' },
       { label: 'Select System & Type', icon: '' },
       { label: '+ Add Repo', icon: '' },
       { label: 'Paste URL', icon: '' },
@@ -151,7 +151,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
           {/* Method 1: One-click */}
           <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm">👆</span>
+              <span className="text-sm">ðŸ‘†</span>
               <span className="text-sm font-semibold text-emerald-300">One-Click</span>
             </div>
             <p className="text-xs text-gray-400">On this site, tap <strong className="text-emerald-400">Install</strong> or <strong className="text-emerald-400">Add Repo</strong>. AnymeX opens and adds it automatically.</p>
@@ -169,7 +169,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
           {/* Method 2: Manual */}
           <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/15">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm">📋</span>
+              <span className="text-sm">ðŸ“‹</span>
               <span className="text-sm font-semibold text-amber-300">Manual</span>
             </div>
             <p className="text-xs text-gray-400">Copy the repo URL from this site, then paste it inside AnymeX.</p>
@@ -198,27 +198,27 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
     title: 'Install Extension',
     icon: <Package className="w-5 h-5" />,
     breadcrumbs: [
-      { label: 'Profile', icon: '👤' },
-      { label: 'Extensions', icon: '📦' },
+      { label: 'Profile', icon: 'ðŸ‘¤' },
+      { label: 'Extensions', icon: 'ðŸ“¦' },
       { label: 'Available anime/manga/novel', icon: '' },
-      { label: 'Tap ⬇️ icon', icon: '' },
+      { label: 'Tap â¬‡ï¸ icon', icon: '' },
     ],
     instruction: 'Browse available extensions and install the ones you want.',
     details: (
       <div className="space-y-3">
         <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
           <p className="text-xs text-gray-400">
-            Go to <strong className="text-white">Profile → Extensions</strong>. Under <strong className="text-white">Available</strong> anime/manga/novel, find the extension you want and tap the <strong className="text-white">⬇️ download icon</strong>.
+            Go to <strong className="text-white">Profile â†’ Extensions</strong>. Under <strong className="text-white">Available</strong> anime/manga/novel, find the extension you want and tap the <strong className="text-white">â¬‡ï¸ download icon</strong>.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            <span className="text-sm">📦</span>
+            <span className="text-sm">ðŸ“¦</span>
             <span className="text-xs font-medium text-gray-300">Available</span>
             <ChevronRight className="w-3 h-3 text-gray-600" />
-            <span className="text-sm">⬇️</span>
+            <span className="text-sm">â¬‡ï¸</span>
             <ChevronRight className="w-3 h-3 text-gray-600" />
-            <span className="text-sm">✅</span>
+            <span className="text-sm">âœ…</span>
             <span className="text-xs font-medium text-emerald-400">Installed</span>
           </div>
         </div>
@@ -246,22 +246,22 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
       <div className="space-y-3">
         <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
           <p className="text-xs text-gray-400">
-            Open any anime/manga/novel → Go to the <strong className="text-white">Watch</strong> or <strong className="text-white">Read</strong> tab → Select your installed extension from the list.
+            Open any anime/manga/novel â†’ Go to the <strong className="text-white">Watch</strong> or <strong className="text-white">Read</strong> tab â†’ Select your installed extension from the list.
           </p>
         </div>
         <div className="flex items-center gap-1.5 flex-wrap">
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            <span className="text-sm">🎬</span>
+            <span className="text-sm">ðŸŽ¬</span>
             <span className="text-xs font-medium text-gray-300">Open anime</span>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-600" />
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.1]">
-            <span className="text-sm">📺</span>
+            <span className="text-sm">ðŸ“º</span>
             <span className="text-xs font-medium text-gray-300">Watch tab</span>
           </div>
           <ChevronRight className="w-4 h-4 text-gray-600" />
           <div className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-            <span className="text-sm">✅</span>
+            <span className="text-sm">âœ…</span>
             <span className="text-xs font-medium text-emerald-400">Select extension</span>
           </div>
         </div>
@@ -296,18 +296,9 @@ function GuideContent() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
 
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform>('android')
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null)
   const [currentStep, setCurrentStep] = useState(0)
   const [useBeta, setUseBeta] = useState(false)
-
-  const steps = getSteps(selectedPlatform, useBeta)
-  const totalSteps = steps.length
-
-  // Clamp step if it exceeds total (e.g. switching from Android step 5 to iOS which has 4)
-  const safeStep = Math.min(currentStep, totalSteps - 1)
-  if (safeStep !== currentStep) {
-    setCurrentStep(safeStep)
-  }
 
   // Read URL params on mount
   useEffect(() => {
@@ -329,13 +320,25 @@ function GuideContent() {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const steps = selectedPlatform ? getSteps(selectedPlatform, useBeta) : []
+  const totalSteps = steps.length
+
+  // Clamp step if it exceeds total (e.g. switching from Android step 5 to iOS which has 4)
+  const safeStep = selectedPlatform ? Math.min(currentStep, totalSteps - 1) : 0
+  if (selectedPlatform && safeStep !== currentStep) {
+    setCurrentStep(safeStep)
+  }
+
   // Update URL when state changes
-  const updateUrl = useCallback((platform: Platform, step: number, beta: boolean) => {
+  const updateUrl = useCallback((platform: Platform | null, step: number, beta: boolean) => {
     const sp = new URLSearchParams()
-    sp.set('platform', platform)
-    sp.set('step', String(step + 1))
-    if (beta) sp.set('beta', '1')
-    window.history.replaceState(null, '', `${pathname}?${sp.toString()}`)
+    if (platform) {
+      sp.set('platform', platform)
+      sp.set('step', String(step + 1))
+      if (beta) sp.set('beta', '1')
+    }
+    const str = sp.toString()
+    window.history.replaceState(null, '', `${pathname}${str ? `?${str}` : ''}`)
   }, [pathname])
 
   // Sync URL on state change
@@ -343,9 +346,14 @@ function GuideContent() {
     updateUrl(selectedPlatform, safeStep, useBeta)
   }, [selectedPlatform, safeStep, useBeta, updateUrl])
 
-  // Reset step when platform changes
+  // Handle platform selection
   const handlePlatformChange = (p: Platform) => {
     setSelectedPlatform(p)
+    setCurrentStep(0)
+  }
+
+  const handlePlatformReset = () => {
+    setSelectedPlatform(null)
     setCurrentStep(0)
   }
 
@@ -388,54 +396,73 @@ function GuideContent() {
           <p className="text-sm text-gray-400">Follow the steps for your device to get started with AnymeX extensions.</p>
         </div>
 
-        {/* Platform Selector */}
-        <div className="mb-6">
-          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Select your platform</p>
-          <div className="flex flex-wrap gap-2">
-            {PLATFORMS.map(p => (
+        {/* ===== NO PLATFORM SELECTED: Show platform picker ===== */}
+        {!selectedPlatform && (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-400">What device are you using? Select your platform to get started.</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {PLATFORMS.map(p => (
+                <button
+                  key={p.id}
+                  onClick={() => handlePlatformChange(p.id)}
+                  className="flex flex-col items-center gap-3 p-6 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+                >
+                  <div className={`w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center ${p.color} group-hover:scale-110 transition-transform`}>
+                    {p.icon}
+                  </div>
+                  <span className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors">{p.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ===== PLATFORM SELECTED: Show guide steps ===== */}
+        {selectedPlatform && (
+          <>
+            {/* Platform pill + change button */}
+            <div className="mb-6 flex items-center gap-2">
+              {PLATFORMS.filter(p => p.id === selectedPlatform).map(p => (
+                <span key={p.id} className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium bg-white/10 border border-white/20 ${p.color}`}>
+                  {p.icon}
+                  {p.name}
+                </span>
+              ))}
               <button
-                key={p.id}
-                onClick={() => handlePlatformChange(p.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all border ${
-                  selectedPlatform === p.id
-                    ? `bg-white/10 text-white border-white/20 ${p.color}`
-                    : 'bg-white/[0.03] text-gray-500 border-white/[0.06] hover:bg-white/[0.06] hover:text-gray-300'
+                onClick={handlePlatformReset}
+                className="text-xs text-gray-500 hover:text-gray-300 transition-colors ml-1"
+              >
+                Change
+              </button>
+            </div>
+
+            {/* Stable / Beta Toggle */}
+            <div className="mb-6 flex items-center gap-2">
+              <button
+                onClick={() => setUseBeta(false)}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+                  !useBeta ? 'bg-white/10 text-white border-white/15' : 'text-gray-500 hover:text-gray-300 border-transparent hover:border-white/[0.06]'
                 }`}
               >
-                {p.icon}
-                {p.name}
+                Stable
               </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Stable / Beta Toggle */}
-        <div className="mb-6 flex items-center gap-2">
-          <button
-            onClick={() => setUseBeta(false)}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
-              !useBeta ? 'bg-white/10 text-white border-white/15' : 'text-gray-500 hover:text-gray-300 border-transparent hover:border-white/[0.06]'
-            }`}
-          >
-            Stable
-          </button>
-          <button
-            onClick={() => setUseBeta(true)}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
-              useBeta ? 'bg-amber-500/15 text-amber-400 border-amber-500/25' : 'text-gray-500 hover:text-gray-300 border-transparent hover:border-white/[0.06]'
-            }`}
-          >
-            Beta
-          </button>
-          <a
-            href={useBeta ? 'https://github.com/Shebyyy/AnymeX-Preview/releases/latest' : 'https://github.com/RyanYuuki/AnymeX/releases/latest'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-auto text-xs text-gray-500 hover:text-gray-300 transition-colors"
-          >
-            All releases →
-          </a>
-        </div>
+              <button
+                onClick={() => setUseBeta(true)}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+                  useBeta ? 'bg-amber-500/15 text-amber-400 border-amber-500/25' : 'text-gray-500 hover:text-gray-300 border-transparent hover:border-white/[0.06]'
+                }`}
+              >
+                Beta
+              </button>
+              <a
+                href={useBeta ? 'https://github.com/Shebyyy/AnymeX-Preview/releases/latest' : 'https://github.com/RyanYuuki/AnymeX/releases/latest'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto text-xs text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                All releases â†’
+              </a>
+            </div>
 
         {/* Progress Bar */}
         <div className="mb-6">
@@ -524,7 +551,7 @@ function GuideContent() {
                 onClick={() => setCurrentStep(safeStep - 1)}
                 className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all"
               >
-                ← Back
+                â† Back
               </button>
             ) : <div />}
 
@@ -546,7 +573,7 @@ function GuideContent() {
                 onClick={() => setCurrentStep(safeStep + 1)}
                 className="inline-flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
               >
-                Next →
+                Next â†’
               </button>
             ) : (
               <div className="flex items-center gap-2">
@@ -592,6 +619,8 @@ function GuideContent() {
               </div>
             </div>
           </div>
+        )}
+          </>
         )}
       </main>
 
