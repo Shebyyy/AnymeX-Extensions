@@ -45,7 +45,7 @@ interface Step {
 
 interface Phase {
   title: string
-  emoji: string
+  icon: React.ReactNode
   color: string
   border: string
   bg: string
@@ -55,7 +55,7 @@ interface Phase {
 const PHASES: Phase[] = [
   {
     title: 'Setup Permissions',
-    emoji: '🔧',
+    icon: <Shield className="w-4 h-4" />,
     color: 'text-amber-400',
     border: 'border-amber-500/20',
     bg: 'bg-amber-500/5',
@@ -65,7 +65,7 @@ const PHASES: Phase[] = [
         icon: <User className="w-4 h-4" />,
         path: [{ label: 'AnymeX', icon: <Smartphone className="w-3 h-3" /> }, { label: 'Profile', icon: <User className="w-3 h-3" /> }],
         instruction: 'Open the AnymeX app and tap on your Profile icon.',
-        tip: 'Profile is usually in the bottom navigation bar or top-left menu.',
+        tip: 'Profile is usually in the top-left or top-right corner.',
       },
       {
         title: 'Go to Downloads',
@@ -109,7 +109,7 @@ const PHASES: Phase[] = [
   },
   {
     title: 'Configure Downloads',
-    emoji: '📁',
+    icon: <FolderOpen className="w-4 h-4" />,
     color: 'text-sky-400',
     border: 'border-sky-500/20',
     bg: 'bg-sky-500/5',
@@ -131,7 +131,7 @@ const PHASES: Phase[] = [
   },
   {
     title: 'Search & Select',
-    emoji: '🔍',
+    icon: <FileSearch className="w-4 h-4" />,
     color: 'text-violet-400',
     border: 'border-violet-500/20',
     bg: 'bg-violet-500/5',
@@ -185,7 +185,7 @@ const PHASES: Phase[] = [
   },
   {
     title: 'Download',
-    emoji: '⬇️',
+    icon: <Download className="w-4 h-4" />,
     color: 'text-emerald-400',
     border: 'border-emerald-500/20',
     bg: 'bg-emerald-500/5',
@@ -247,7 +247,7 @@ const PHASES: Phase[] = [
   },
   {
     title: 'View Downloads',
-    emoji: '✅',
+    icon: <CheckCircle2 className="w-4 h-4" />,
     color: 'text-rose-400',
     border: 'border-rose-500/20',
     bg: 'bg-rose-500/5',
@@ -331,7 +331,7 @@ function DownloadGuideContent() {
               href={`#${p.title.toLowerCase().replace(/\s+/g, '-')}`}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-medium whitespace-nowrap border transition-all ${p.border} ${p.color} ${p.bg} hover:opacity-80`}
             >
-              <span>{p.emoji}</span>
+              <span className="flex-shrink-0">{p.icon}</span>
               <span>{p.title}</span>
             </a>
           ))}
@@ -343,7 +343,9 @@ function DownloadGuideContent() {
             <section key={p.title} id={p.title.toLowerCase().replace(/\s+/g, '-')}>
               {/* Phase Header */}
               <div className={`flex items-center gap-2 mb-3 pb-2 border-b ${p.border}`}>
-                <span className="text-lg">{p.emoji}</span>
+                <div className={`w-6 h-6 rounded-md ${p.bg} border ${p.border} flex items-center justify-center ${p.color} flex-shrink-0`}>
+                  {p.icon}
+                </div>
                 <h2 className={`text-sm sm:text-base font-bold ${p.color}`}>{p.title}</h2>
               </div>
 
@@ -355,9 +357,14 @@ function DownloadGuideContent() {
                     className={`rounded-xl border ${p.border} bg-white/[0.01] p-3 sm:p-4`}
                   >
                     <div className="flex items-start gap-3">
-                      {/* Step Number */}
-                      <div className={`w-8 h-8 rounded-lg ${p.bg} border ${p.border} flex items-center justify-center ${p.color} flex-shrink-0`}>
-                        <span className="text-xs font-bold">{s.num}</span>
+                      {/* Step Icon + Number */}
+                      <div className="relative flex-shrink-0">
+                        <div className={`w-10 h-10 rounded-xl ${p.bg} border ${p.border} flex items-center justify-center ${p.color}`}>
+                          {s.icon}
+                        </div>
+                        <span className={`absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full ${p.bg} border ${p.border} flex items-center justify-center text-[10px] font-bold ${p.color}`}>
+                          {s.num}
+                        </span>
                       </div>
 
                       <div className="flex-1 min-w-0">
@@ -365,14 +372,14 @@ function DownloadGuideContent() {
                         <h3 className="text-sm font-semibold text-white mb-1">{s.title}</h3>
 
                         {/* Tap Path */}
-                        <div className="flex items-center gap-1 flex-wrap mb-2">
+                        <div className="flex items-center gap-1 flex-wrap py-1 mb-2">
                           {s.path.map((item, i) => (
                             <div key={i} className="flex items-center gap-1">
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/[0.05] border border-white/[0.08] text-[11px] text-gray-400">
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1] text-xs font-medium text-gray-300">
                                 {item.icon}
                                 {item.label}
                               </span>
-                              {i < s.path.length - 1 && <ChevronRight className="w-3 h-3 text-gray-600" />}
+                              {i < s.path.length - 1 && <ChevronRight className="w-3.5 h-3.5 text-gray-600" />}
                             </div>
                           ))}
                         </div>
