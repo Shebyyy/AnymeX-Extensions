@@ -291,10 +291,8 @@ function DownloadGuideContent() {
         </div>
       </header>
 
-      <main className="px-4 sm:px-6 py-5 sm:py-8 flex-1 max-w-6xl mx-auto w-full">
-        <div className="flex gap-8">
-          <GuideSidebar />
-          <div className="flex-1 min-w-0">
+      <main className="px-4 sm:px-6 py-5 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
+        <GuideSidebar />
         {/* Title */}
         <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Download Guide</h1>
         <p className="text-sm text-gray-400 mb-6">How to download anime & manga in AnymeX — step by step.</p>
@@ -400,8 +398,6 @@ function DownloadGuideContent() {
             </div>
             <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />
           </Link>
-        </div>
-          </div>
         </div>
       </main>
 

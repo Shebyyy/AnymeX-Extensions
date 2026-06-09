@@ -406,10 +406,8 @@ function GuideContent() {
         </div>
       </header>
 
-      <main className="px-4 sm:px-6 py-6 sm:py-8 flex-1 max-w-6xl mx-auto w-full">
-        <div className="flex gap-8">
-          <GuideSidebar />
-          <div className="flex-1 min-w-0">
+      <main className="px-4 sm:px-6 py-6 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
+        <GuideSidebar />
         {/* Title */}
         <div className="mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Setup Guide</h1>
@@ -642,8 +640,6 @@ function GuideContent() {
         )}
           </>
         )}
-          </div>
-        </div>
       </main>
 
       {/* Footer */}
