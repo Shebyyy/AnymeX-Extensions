@@ -407,12 +407,12 @@ function GuideContent() {
       </header>
 
       <main className="px-4 sm:px-6 py-6 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
-        <GuideSidebar />
         {/* Title */}
-        <div className="mb-6">
-          <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Setup Guide</h1>
-          <p className="text-sm text-gray-400">Follow the steps for your device to get started with AnymeX extensions.</p>
+        <div className="mb-1 flex items-center gap-3">
+          <GuideSidebar />
+          <h1 className="text-xl sm:text-2xl font-bold text-white">Setup Guide</h1>
         </div>
+        <p className="text-sm text-gray-400 mb-6">Follow the steps for your device to get started with AnymeX extensions.</p>
 
         {/* ===== NO PLATFORM SELECTED: Show platform picker ===== */}
         {!selectedPlatform && (
