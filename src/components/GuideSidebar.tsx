@@ -37,10 +37,10 @@ export default function GuideSidebar() {
 
   return (
     <>
-      {/* ☰ button - sits inline next to title */}
+      {/* Floating ☰ button - absolute, no layout impact */}
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.1] text-gray-400 hover:text-white hover:bg-white/[0.12] transition-all flex-shrink-0"
+        className="absolute -left-10 top-1 z-30 w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.1] flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/[0.12] transition-all"
         aria-label="Toggle guides"
       >
         <Menu className="w-4 h-4" />
@@ -54,7 +54,7 @@ export default function GuideSidebar() {
         />
       )}
 
-      {/* Sliding sidebar - fixed, no layout impact */}
+      {/* Sliding sidebar */}
       <aside className={`fixed top-0 left-0 h-full w-60 bg-[#0a0a0f] border-r border-white/[0.06] z-50 transform transition-transform duration-200 ease-in-out ${open ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
           <p className="text-xs font-semibold text-gray-300 uppercase tracking-wider">Guides</p>

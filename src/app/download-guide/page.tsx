@@ -293,7 +293,7 @@ function DownloadGuideContent() {
 
       <main className="px-4 sm:px-6 py-5 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
         {/* Title */}
-        <div className="flex items-center gap-3 mb-1">
+        <div className="relative flex items-center gap-3 mb-1">
           <GuideSidebar />
           <h1 className="text-xl sm:text-2xl font-bold text-white">Download Guide</h1>
         </div>
