@@ -5,7 +5,7 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Copy, ExternalLink, X, ChevronDown, Check, Package, Zap, RefreshCw, EyeOff, Eye, BookOpen } from 'lucide-react'
+import { Search, Copy, ExternalLink, X, ChevronDown, Check, Package, Zap, RefreshCw, EyeOff, Eye, BookOpen, Download } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 // ============ TYPES ============
@@ -722,6 +722,16 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
               >
                 <BookOpen className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Guide</span>
+              </Link>
+
+              {/* Download Guide link */}
+              <Link
+                href="/download-guide"
+                className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] sm:text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all"
+                title="Download Guide"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Download</span>
               </Link>
             </div>
           </div>

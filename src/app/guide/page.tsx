@@ -393,6 +393,13 @@ function GuideContent() {
                 <Copy className="w-4 h-4" />
                 <span className="hidden sm:inline">Repos</span>
               </Link>
+              <Link
+                href="/download-guide"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Download Guide</span>
+              </Link>
             </div>
           </div>
         </div>
