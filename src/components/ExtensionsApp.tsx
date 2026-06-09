@@ -714,24 +714,14 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                 </Link>
               </div>
 
-              {/* Guide link */}
+              {/* Guides link */}
               <Link
-                href="/guide"
+                href="/guides"
                 className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] sm:text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all"
-                title="Guide"
+                title="Guides"
               >
                 <BookOpen className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Guide</span>
-              </Link>
-
-              {/* Download Guide link */}
-              <Link
-                href="/download-guide"
-                className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] sm:text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all"
-                title="Download Guide"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Download</span>
+                <span className="hidden sm:inline">Guides</span>
               </Link>
             </div>
           </div>

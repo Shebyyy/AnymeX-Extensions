@@ -31,6 +31,7 @@ import {
   RotateCcw,
   Check,
 } from 'lucide-react'
+import GuideSidebar from '@/components/GuideSidebar'
 
 // ============ STEP DATA ============
 
@@ -281,20 +282,19 @@ function DownloadGuideContent() {
                 <Copy className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Repos</span>
               </Link>
-              <Link href="/guide" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
+              <Link href="/guides" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-white bg-white/10 border border-white/20 transition-all">
                 <BookOpen className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Guide</span>
-              </Link>
-              <Link href="/download-guide" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-white bg-white/10 border border-white/20 transition-all">
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Download Guide</span>
+                <span className="hidden sm:inline">Guides</span>
               </Link>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="px-4 sm:px-6 py-5 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
+      <main className="px-4 sm:px-6 py-5 sm:py-8 flex-1 max-w-6xl mx-auto w-full">
+        <div className="flex gap-8">
+          <GuideSidebar />
+          <div className="flex-1 min-w-0">
         {/* Title */}
         <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Download Guide</h1>
         <p className="text-sm text-gray-400 mb-6">How to download anime & manga in AnymeX — step by step.</p>
@@ -401,6 +401,8 @@ function DownloadGuideContent() {
             <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />
           </Link>
         </div>
+          </div>
+        </div>
       </main>
 
       {/* Footer */}
@@ -410,7 +412,7 @@ function DownloadGuideContent() {
           <div className="flex items-center gap-3">
             <Link href="/extensions" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Extensions</Link>
             <Link href="/repos" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Repos</Link>
-            <Link href="/guide" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Guide</Link>
+            <Link href="/guides" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Guides</Link>
           </div>
         </div>
       </footer>

@@ -25,6 +25,7 @@ import {
   Tv2,
   CheckCircle2,
 } from 'lucide-react'
+import GuideSidebar from '@/components/GuideSidebar'
 
 // ============ TYPES ============
 
@@ -394,18 +395,21 @@ function GuideContent() {
                 <span className="hidden sm:inline">Repos</span>
               </Link>
               <Link
-                href="/download-guide"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
+                href="/guides"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-white bg-white/10 border border-white/20 transition-all"
               >
-                <Download className="w-4 h-4" />
-                <span className="hidden sm:inline">Download Guide</span>
+                <BookOpen className="w-4 h-4" />
+                <span className="hidden sm:inline">Guides</span>
               </Link>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="px-4 sm:px-6 py-6 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
+      <main className="px-4 sm:px-6 py-6 sm:py-8 flex-1 max-w-6xl mx-auto w-full">
+        <div className="flex gap-8">
+          <GuideSidebar />
+          <div className="flex-1 min-w-0">
         {/* Title */}
         <div className="mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Setup Guide</h1>
@@ -638,6 +642,8 @@ function GuideContent() {
         )}
           </>
         )}
+          </div>
+        </div>
       </main>
 
       {/* Footer */}
