@@ -14,9 +14,7 @@ import {
   CheckCircle2,
   ChevronRight,
   ChevronDown,
-  ArrowDown,
   ListChecks,
-  Monitor,
   Smartphone,
   Package,
   Copy,
@@ -28,7 +26,6 @@ import {
   HardDrive,
   FileSearch,
   Zap,
-  Eye,
   Layers,
   Globe,
   SlidersHorizontal,
@@ -52,7 +49,6 @@ interface Phase {
   id: string
   title: string
   emoji: string
-  accent: string
   accentBg: string
   accentBorder: string
   accentText: string
@@ -66,7 +62,6 @@ const PHASES: Phase[] = [
     id: 'permissions',
     title: 'Setup Permissions',
     emoji: '🔧',
-    accent: 'amber',
     accentBg: 'bg-amber-500/10',
     accentBorder: 'border-amber-500/20',
     accentText: 'text-amber-400',
@@ -152,7 +147,6 @@ const PHASES: Phase[] = [
     id: 'configure',
     title: 'Configure Downloads',
     emoji: '📁',
-    accent: 'sky',
     accentBg: 'bg-sky-500/10',
     accentBorder: 'border-sky-500/20',
     accentText: 'text-sky-400',
@@ -184,7 +178,6 @@ const PHASES: Phase[] = [
     id: 'search',
     title: 'Search & Select',
     emoji: '🔍',
-    accent: 'violet',
     accentBg: 'bg-violet-500/10',
     accentBorder: 'border-violet-500/20',
     accentText: 'text-violet-400',
@@ -257,7 +250,6 @@ const PHASES: Phase[] = [
     id: 'download',
     title: 'Download Content',
     emoji: '⬇️',
-    accent: 'emerald',
     accentBg: 'bg-emerald-500/10',
     accentBorder: 'border-emerald-500/20',
     accentText: 'text-emerald-400',
@@ -272,22 +264,20 @@ const PHASES: Phase[] = [
         ],
         instruction: 'Select the episodes or chapters you want to download.',
         details: (
-          <div className="space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
-                <div className="flex items-center gap-2 mb-1">
-                  <CircleDot className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm font-semibold text-emerald-300">Multi-Select</span>
-                </div>
-                <p className="text-xs text-gray-400">Tap on individual episodes or chapters to select them one by one.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
+              <div className="flex items-center gap-2 mb-1">
+                <CircleDot className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm font-semibold text-emerald-300">Multi-Select</span>
               </div>
-              <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
-                <div className="flex items-center gap-2 mb-1">
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm font-semibold text-emerald-300">Select All</span>
-                </div>
-                <p className="text-xs text-gray-400">Use the "Select All" button to select every episode or chapter at once.</p>
+              <p className="text-xs text-gray-400">Tap on individual episodes or chapters to select them one by one.</p>
+            </div>
+            <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
+              <div className="flex items-center gap-2 mb-1">
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm font-semibold text-emerald-300">Select All</span>
               </div>
+              <p className="text-xs text-gray-400">Use the "Select All" button to select every episode or chapter at once.</p>
             </div>
           </div>
         ),
@@ -298,7 +288,7 @@ const PHASES: Phase[] = [
         title: 'Click Download',
         icon: <Download className="w-5 h-5" />,
         breadcrumbs: [
-          { label: `Download X Episodes/Chapters`, icon: <Download className="w-3.5 h-3.5" /> },
+          { label: 'Download X Episodes/Chapters', icon: <Download className="w-3.5 h-3.5" /> },
         ],
         instruction: 'Click the "Download X Episodes/Chapters" button (X = number of items selected) to proceed.',
         tip: 'The button shows the count of selected items so you can verify before downloading.',
@@ -342,7 +332,6 @@ const PHASES: Phase[] = [
     id: 'view',
     title: 'View Downloads',
     emoji: '✅',
-    accent: 'rose',
     accentBg: 'bg-rose-500/10',
     accentBorder: 'border-rose-500/20',
     accentText: 'text-rose-400',
@@ -356,13 +345,6 @@ const PHASES: Phase[] = [
           { label: 'Queue', icon: <ListChecks className="w-3.5 h-3.5" /> },
         ],
         instruction: 'Click the Download icon in the top-right corner to see your active downloads and queue.',
-        details: (
-          <div className="p-3 rounded-lg bg-rose-500/5 border border-rose-500/15">
-            <p className="text-xs text-rose-400/80">
-              The download queue shows all active, pending, and completed downloads. You can pause, resume, or cancel downloads from here.
-            </p>
-          </div>
-        ),
         tip: 'You can also see download progress in your phone\'s notification bar.',
       },
       {
@@ -374,13 +356,6 @@ const PHASES: Phase[] = [
           { label: 'Media', icon: <HardDrive className="w-3.5 h-3.5" /> },
         ],
         instruction: 'Downloaded episodes and chapters appear in the Downloads > Media section for easy access.',
-        details: (
-          <div className="p-3 rounded-lg bg-rose-500/5 border border-rose-500/15">
-            <p className="text-xs text-rose-400/80">
-              From the Media section, you can play downloaded anime episodes or read downloaded manga chapters offline — no internet needed!
-            </p>
-          </div>
-        ),
         tip: 'Downloaded media is available offline, perfect for watching on the go without data!',
       },
     ],
@@ -391,7 +366,7 @@ const PHASES: Phase[] = [
 
 function BreadcrumbPath({ items }: { items: { label: string; icon?: React.ReactNode }[] }) {
   return (
-    <div className="flex items-center gap-1 flex-wrap py-2">
+    <div className="flex items-center gap-1 flex-wrap py-1">
       {items.map((item, i) => (
         <div key={i} className="flex items-center gap-1">
           <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1]">
@@ -405,7 +380,7 @@ function BreadcrumbPath({ items }: { items: { label: string; icon?: React.ReactN
   )
 }
 
-// ============ FLATTEN STEPS FOR NAVIGATION ============
+// ============ FLATTEN STEPS ============
 
 interface FlatStep extends Step {
   phaseIndex: number
@@ -430,8 +405,6 @@ const TOTAL_STEPS = ALL_STEPS.length
 function DownloadGuideContent() {
   const [currentStep, setCurrentStep] = useState(0)
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set())
-  const [expandedPhases, setExpandedPhases] = useState<Set<string>>(new Set(['permissions']))
-  const [showCheckmarks, setShowCheckmarks] = useState(true)
 
   const step = ALL_STEPS[currentStep]
   const phase = PHASES[step.phaseIndex]
@@ -439,50 +412,29 @@ function DownloadGuideContent() {
   const toggleStepComplete = (stepId: string) => {
     setCompletedSteps(prev => {
       const next = new Set(prev)
-      if (next.has(stepId)) {
-        next.delete(stepId)
-      } else {
-        next.add(stepId)
-      }
-      return next
-    })
-  }
-
-  const togglePhaseExpand = (phaseId: string) => {
-    setExpandedPhases(prev => {
-      const next = new Set(prev)
-      if (next.has(phaseId)) {
-        next.delete(phaseId)
-      } else {
-        next.add(phaseId)
-      }
+      if (next.has(stepId)) next.delete(stepId)
+      else next.add(stepId)
       return next
     })
   }
 
   const goToStep = (globalIndex: number) => {
     setCurrentStep(globalIndex)
-    const targetPhase = PHASES[ALL_STEPS[globalIndex].phaseIndex]
-    setExpandedPhases(prev => new Set([...prev, targetPhase.id]))
   }
 
   const goToPhase = (phaseIndex: number) => {
     const firstStepInPhase = PHASES.slice(0, phaseIndex).reduce((acc, p) => acc + p.steps.length, 0)
     setCurrentStep(firstStepInPhase)
-    setExpandedPhases(prev => new Set([...prev, PHASES[phaseIndex].id]))
+  }
+
+  const getStepGlobalIndex = (phaseIndex: number, stepInPhase: number) => {
+    let idx = 0
+    for (let i = 0; i < phaseIndex; i++) idx += PHASES[i].steps.length
+    return idx + stepInPhase
   }
 
   const completedCount = completedSteps.size
-  const progressPercent = TOTAL_STEPS > 0 ? (completedCount / TOTAL_STEPS) * 100 : 0
-
-  // Calculate step index within a phase
-  const getStepGlobalIndex = (phaseIndex: number, stepInPhase: number) => {
-    let idx = 0
-    for (let i = 0; i < phaseIndex; i++) {
-      idx += PHASES[i].steps.length
-    }
-    return idx + stepInPhase
-  }
+  const isDone = completedSteps.has(step.id)
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0a0f] text-gray-100">
@@ -496,33 +448,21 @@ function DownloadGuideContent() {
                 AnymeX Extensions
               </Link>
             </div>
-            <div className="flex items-center gap-2">
-              <Link
-                href="/extensions"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
-              >
-                <Package className="w-4 h-4" />
+            <div className="flex items-center gap-1.5">
+              <Link href="/extensions" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
+                <Package className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Extensions</span>
               </Link>
-              <Link
-                href="/repos"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
-              >
-                <Copy className="w-4 h-4" />
+              <Link href="/repos" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
+                <Copy className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Repos</span>
               </Link>
-              <Link
-                href="/guide"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
-              >
-                <BookOpen className="w-4 h-4" />
+              <Link href="/guide" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
+                <BookOpen className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Guide</span>
               </Link>
-              <Link
-                href="/download-guide"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-white bg-white/10 border border-white/20 transition-all"
-              >
-                <Download className="w-4 h-4" />
+              <Link href="/download-guide" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-white bg-white/10 border border-white/20 transition-all">
+                <Download className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Download Guide</span>
               </Link>
             </div>
@@ -530,159 +470,45 @@ function DownloadGuideContent() {
         </div>
       </header>
 
-      <main className="px-4 sm:px-6 py-6 sm:py-8 flex-1 max-w-4xl mx-auto w-full">
-        {/* Title */}
-        <div className="mb-6">
-          <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">Download Guide</h1>
-          <p className="text-sm text-gray-400">Step-by-step guide to downloading anime and manga in AnymeX.</p>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-gray-500">Overall Progress</span>
-            <span className="text-xs text-gray-400 font-medium">{completedCount}/{TOTAL_STEPS} completed</span>
-          </div>
-          <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-amber-500 via-emerald-500 to-rose-500 transition-all duration-500"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Phase Indicators */}
-        <div className="flex items-center gap-1.5 mb-6 overflow-x-auto pb-1 scrollbar-none">
-          {PHASES.map((p, pi) => {
-            const phaseSteps = p.steps
-            const phaseCompleted = phaseSteps.filter(s => completedSteps.has(s.id)).length
-            const isCurrentPhase = pi === step.phaseIndex
-            const isPhaseComplete = phaseCompleted === phaseSteps.length
-
-            return (
-              <button
-                key={p.id}
-                onClick={() => goToPhase(pi)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all border ${
-                  isCurrentPhase
-                    ? `${p.accentBg} ${p.accentText} ${p.accentBorder}`
-                    : isPhaseComplete
-                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                    : 'bg-white/5 text-gray-500 border-white/10 hover:bg-white/10 hover:text-gray-300'
-                }`}
-              >
-                <span>{p.emoji}</span>
-                <span className="hidden sm:inline">{p.title}</span>
-                <span className="sm:hidden">{p.emoji}</span>
-                {phaseCompleted > 0 && (
-                  <span className={`text-[10px] ${isPhaseComplete ? 'text-emerald-400' : 'text-gray-500'}`}>
-                    {phaseCompleted}/{phaseSteps.length}
-                  </span>
-                )}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Checkmark toggle */}
-        <div className="flex items-center justify-end mb-4">
-          <button
-            onClick={() => setShowCheckmarks(!showCheckmarks)}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-gray-500 hover:text-gray-300 bg-white/5 border border-white/10 hover:bg-white/10 transition-all"
-          >
-            <Check className="w-3.5 h-3.5" />
-            {showCheckmarks ? 'Hide' : 'Show'} checkmarks
-          </button>
-        </div>
-
-        {/* Phase Collapsible Sections */}
-        <div className="space-y-3 mb-6">
-          {PHASES.map((p, pi) => {
-            const isExpanded = expandedPhases.has(p.id)
-            const phaseSteps = p.steps
-            const phaseCompleted = phaseSteps.filter(s => completedSteps.has(s.id)).length
-            const isCurrentPhase = pi === step.phaseIndex
-
-            return (
-              <div
-                key={p.id}
-                className={`rounded-xl border overflow-hidden transition-all ${
-                  isCurrentPhase ? `${p.accentBorder} bg-white/[0.02]` : 'border-white/[0.06] bg-white/[0.01]'
-                }`}
-              >
-                {/* Phase Header */}
+      <main className="px-4 sm:px-6 py-4 sm:py-6 flex-1 max-w-4xl mx-auto w-full">
+        {/* Title + Phase tabs in one row */}
+        <div className="mb-4">
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">Download Guide</h1>
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            {PHASES.map((p, pi) => {
+              const isCurrentPhase = pi === step.phaseIndex
+              const phaseCompleted = p.steps.filter(s => completedSteps.has(s.id)).length
+              const isPhaseComplete = phaseCompleted === p.steps.length
+              return (
                 <button
-                  onClick={() => togglePhaseExpand(p.id)}
-                  className="w-full flex items-center justify-between px-4 sm:px-5 py-3 hover:bg-white/[0.02] transition-all"
+                  key={p.id}
+                  onClick={() => goToPhase(pi)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] sm:text-xs font-medium whitespace-nowrap transition-all border ${
+                    isCurrentPhase
+                      ? `${p.accentBg} ${p.accentText} ${p.accentBorder}`
+                      : isPhaseComplete
+                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                      : 'bg-white/5 text-gray-500 border-white/10 hover:bg-white/10 hover:text-gray-300'
+                  }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-lg">{p.emoji}</span>
-                    <div className="text-left">
-                      <h3 className={`text-sm font-semibold ${isCurrentPhase ? p.accentText : 'text-gray-200'}`}>
-                        {p.title}
-                      </h3>
-                      <p className="text-[11px] text-gray-500">
-                        {phaseCompleted === phaseSteps.length ? 'Complete!' : `${phaseCompleted}/${phaseSteps.length} steps`}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {phaseCompleted === phaseSteps.length && (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    )}
-                    <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                  </div>
+                  <span>{p.emoji}</span>
+                  <span>{p.title}</span>
+                  {isPhaseComplete && <Check className="w-3 h-3" />}
                 </button>
-
-                {/* Phase Steps List */}
-                {isExpanded && (
-                  <div className="border-t border-white/[0.06] px-4 sm:px-5 py-2">
-                    {phaseSteps.map((s, si) => {
-                      const globalIdx = getStepGlobalIndex(pi, si)
-                      const isActive = globalIdx === currentStep
-                      const isDone = completedSteps.has(s.id)
-
-                      return (
-                        <button
-                          key={s.id}
-                          onClick={() => goToStep(globalIdx)}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all mb-1 text-left ${
-                            isActive
-                              ? `${p.accentBg} ${p.accentText}`
-                              : 'hover:bg-white/[0.03]'
-                          }`}
-                        >
-                          <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
-                            isDone && showCheckmarks
-                              ? 'bg-emerald-500/20 text-emerald-400'
-                              : isActive
-                              ? `${p.accentBg} ${p.accentText} border ${p.accentBorder}`
-                              : 'bg-white/10 text-gray-500'
-                          }`}>
-                            {isDone && showCheckmarks ? <Check className="w-3.5 h-3.5" /> : globalIdx + 1}
-                          </span>
-                          <span className={`text-sm ${isActive ? 'font-medium text-white' : isDone ? 'text-gray-400' : 'text-gray-400'}`}>
-                            {s.title}
-                          </span>
-                        </button>
-                      )
-                    })}
-                  </div>
-                )}
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
 
-        {/* Current Step Detail Card */}
-        <div className="rounded-xl bg-white/[0.02] border border-white/[0.06] overflow-hidden">
-          {/* Step Header */}
+        {/* ====== MAIN STEP CARD — RIGHT AT THE TOP ====== */}
+        <div className="rounded-xl bg-white/[0.02] border border-white/[0.06] overflow-hidden mb-4">
+          {/* Step Header with phase color */}
           <div className={`px-4 sm:px-6 py-4 border-b border-white/[0.06] ${phase.accentBg}`}>
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 rounded-xl ${phase.accentBg} border ${phase.accentBorder} flex items-center justify-center ${phase.accentText}`}>
                 {step.icon}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className={`w-6 h-6 rounded-full ${phase.accentBg} border ${phase.accentBorder} flex items-center justify-center text-xs font-bold ${phase.accentText}`}>
                     {currentStep + 1}
@@ -691,19 +517,17 @@ function DownloadGuideContent() {
                 </div>
                 <p className="text-sm text-gray-400 mt-0.5">{step.instruction}</p>
               </div>
-              {showCheckmarks && (
-                <button
-                  onClick={() => toggleStepComplete(step.id)}
-                  className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
-                    completedSteps.has(step.id)
-                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                      : 'bg-white/5 text-gray-500 border border-white/10 hover:bg-white/10'
-                  }`}
-                  title={completedSteps.has(step.id) ? 'Mark as incomplete' : 'Mark as complete'}
-                >
-                  <Check className="w-4 h-4" />
-                </button>
-              )}
+              <button
+                onClick={() => toggleStepComplete(step.id)}
+                className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all flex-shrink-0 ${
+                  isDone
+                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                    : 'bg-white/5 text-gray-500 border border-white/10 hover:bg-white/10'
+                }`}
+                title={isDone ? 'Mark as incomplete' : 'Mark as complete'}
+              >
+                <Check className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
@@ -732,8 +556,8 @@ function DownloadGuideContent() {
             </div>
           )}
 
-          {/* Step Navigation */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-t border-white/[0.06]">
+          {/* Navigation */}
+          <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-t border-white/[0.06]">
             {currentStep > 0 ? (
               <button
                 onClick={() => setCurrentStep(currentStep - 1)}
@@ -743,26 +567,7 @@ function DownloadGuideContent() {
               </button>
             ) : <div />}
 
-            {/* Dots */}
-            <div className="flex items-center gap-1 overflow-x-auto max-w-[200px] scrollbar-none py-1">
-              {ALL_STEPS.map((_, i) => {
-                const dotPhase = PHASES[ALL_STEPS[i].phaseIndex]
-                const isDone = completedSteps.has(ALL_STEPS[i].id)
-                return (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentStep(i)}
-                    className={`rounded-full transition-all flex-shrink-0 ${
-                      i === currentStep
-                        ? `w-5 h-2 ${dotPhase.accentText.replace('text-', 'bg-')}`
-                        : isDone
-                        ? 'w-2 h-2 bg-emerald-500/60'
-                        : 'w-2 h-2 bg-white/20'
-                    }`}
-                  />
-                )
-              })}
-            </div>
+            <span className="text-xs text-gray-500">{currentStep + 1} / {TOTAL_STEPS}</span>
 
             {currentStep < TOTAL_STEPS - 1 ? (
               <button
@@ -773,11 +578,68 @@ function DownloadGuideContent() {
               </button>
             ) : (
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-emerald-400" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span className="text-sm font-medium text-emerald-400">All Done!</span>
               </div>
             )}
           </div>
+        </div>
+
+        {/* ====== ALL STEPS LIST — COMPACT, BELOW THE CARD ====== */}
+        <div className="space-y-1.5">
+          {PHASES.map((p, pi) => {
+            const isCurrentPhase = pi === step.phaseIndex
+            return (
+              <div key={p.id} className={`rounded-lg border overflow-hidden transition-all ${isCurrentPhase ? `${p.accentBorder} bg-white/[0.02]` : 'border-white/[0.04] bg-white/[0.01]'}`}>
+                <button
+                  onClick={() => goToPhase(pi)}
+                  className="w-full flex items-center justify-between px-3 py-2 hover:bg-white/[0.02] transition-all"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">{p.emoji}</span>
+                    <span className={`text-xs font-semibold ${isCurrentPhase ? p.accentText : 'text-gray-300'}`}>{p.title}</span>
+                    {p.steps.filter(s => completedSteps.has(s.id)).length === p.steps.length && (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    )}
+                  </div>
+                  <span className="text-[10px] text-gray-600">
+                    {p.steps.filter(s => completedSteps.has(s.id)).length}/{p.steps.length}
+                  </span>
+                </button>
+
+                {/* Show steps for current phase always, others on click */}
+                {isCurrentPhase && (
+                  <div className="border-t border-white/[0.04] px-2 py-1.5">
+                    {p.steps.map((s, si) => {
+                      const globalIdx = getStepGlobalIndex(pi, si)
+                      const isActive = globalIdx === currentStep
+                      const isStepDone = completedSteps.has(s.id)
+                      return (
+                        <button
+                          key={s.id}
+                          onClick={() => goToStep(globalIdx)}
+                          className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md transition-all text-left ${
+                            isActive ? `${p.accentBg} ${p.accentText}` : 'hover:bg-white/[0.03]'
+                          }`}
+                        >
+                          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${
+                            isStepDone
+                              ? 'bg-emerald-500/20 text-emerald-400'
+                              : isActive
+                              ? `${p.accentBg} ${p.accentText} border ${p.accentBorder}`
+                              : 'bg-white/10 text-gray-500'
+                          }`}>
+                            {isStepDone ? <Check className="w-3 h-3" /> : globalIdx + 1}
+                          </span>
+                          <span className={`text-xs ${isActive ? 'font-medium text-white' : 'text-gray-400'}`}>{s.title}</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
 
         {/* Quick Links */}
