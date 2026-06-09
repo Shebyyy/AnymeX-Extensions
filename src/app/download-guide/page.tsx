@@ -61,11 +61,11 @@ const PHASES: Phase[] = [
     bg: 'bg-amber-500/5',
     steps: [
       {
-        title: 'Open Downloads Settings',
+        title: 'Open Downloads',
         icon: <Download className="w-4 h-4" />,
         path: [{ label: 'Profile', icon: <User className="w-3 h-3" /> }, { label: 'Downloads', icon: <Download className="w-3 h-3" /> }],
-        instruction: 'Tap your Profile icon (top-left or top-right), then tap "Downloads".',
-        tip: 'This is where all download settings and permissions live.',
+        instruction: 'Tap your Profile icon (top-left or top-right), then tap "Downloads". On first time, it will ask for permissions.',
+        tip: 'The first-time prompt handles notifications and background run permissions.',
       },
       {
         title: 'Allow Notifications & Background Run',
