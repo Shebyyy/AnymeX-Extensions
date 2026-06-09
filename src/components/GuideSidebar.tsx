@@ -37,13 +37,13 @@ export default function GuideSidebar() {
 
   return (
     <>
-      {/* Floating ☰ button - absolute, no layout impact */}
+      {/* Floating ☰ button - fixed FAB, stays visible on scroll */}
       <button
         onClick={() => setOpen(!open)}
-        className="absolute -left-10 top-1 z-30 w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.1] flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/[0.12] transition-all"
+        className="fixed bottom-6 left-6 z-30 w-11 h-11 rounded-xl bg-white/[0.08] border border-white/[0.12] flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/[0.15] transition-all shadow-lg shadow-black/30 backdrop-blur-sm"
         aria-label="Toggle guides"
       >
-        <Menu className="w-4 h-4" />
+        <Menu className="w-5 h-5" />
       </button>
 
       {/* Overlay */}
