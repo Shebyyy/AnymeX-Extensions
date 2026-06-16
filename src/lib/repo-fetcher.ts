@@ -611,61 +611,75 @@ export async function fetchKotatsuReleases(forceRefresh = false): Promise<Unifie
     return cachedKotatsu
   }
 
-  try {
-    const res = await fetch('https://api.github.com/repos/mochi-plugins/repository/releases/latest', {
-      headers: { 'User-Agent': 'Mozilla/5.0' },
-      next: { revalidate: 3600 },
-    })
-    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+  const KOTATSU_SOURCES = [
+    { repo: 'mochi-plugins', url: 'https://api.github.com/repos/mochi-plugins/repository/releases/latest', repoUrl: 'https://github.com/mochi-plugins/repository' },
+    { repo: 'multi-parsers', url: 'https://api.github.com/repos/Shebyyy/kotatsu-multi-parsers/releases/latest', repoUrl: 'https://github.com/Shebyyy/kotatsu-multi-parsers' },
+  ]
 
-    const release = await res.json() as {
-      tag_name?: string
-      name?: string
-      published_at?: string
-      assets?: { name: string; browser_download_url: string; size: number }[]
-    }
+  const allResults: UnifiedExtension[] = []
 
-    const assets = release.assets || []
-    const jarAssets = assets.filter(a => a.name.endsWith('.jar'))
+  const promises = KOTATSU_SOURCES.map(async (source) => {
+    try {
+      const res = await fetch(source.url, {
+        headers: { 'User-Agent': 'Mozilla/5.0' },
+        next: { revalidate: 3600 },
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
 
-    const results: UnifiedExtension[] = jarAssets.map(asset => {
-      const nameWithoutExt = asset.name.replace(/\.jar$/, '')
-      const sizeMB = (asset.size / (1024 * 1024)).toFixed(1)
-
-      return {
-        _platform: 'kotatsu',
-        _repo: 'mochi-plugins',
-        _repoUrl: 'https://github.com/mochi-plugins/repository',
-        _autoInstall: '',
-        _allInOneAutoInstall: '',
-        _fileType: 'manga',
-        _manifestUrl: asset.browser_download_url,
-        _anymexType: 'manga',
-        _allTypes: ['manga'],
-
-        name: nameWithoutExt,
-        icon: 'https://raw.githubusercontent.com/kotatsuapp/kotatsu-android/master/app/src/main/ic_launcher-playstore.png',
-        language: 'Multi',
-        langBase: 'Multi',
-        languages: ['Multi'],
-        type: 'manga',
-        version: release.tag_name || '',
-        author: 'mochi-plugins',
-
-        baseUrl: asset.browser_download_url,
-        fileSize: sizeMB,
-        jarUrl: asset.browser_download_url,
+      const release = await res.json() as {
+        tag_name?: string
+        name?: string
+        published_at?: string
+        assets?: { name: string; browser_download_url: string; size: number }[]
       }
-    })
 
-    cachedKotatsu = results
-    cachedKotatsuAt = Date.now()
+      const assets = release.assets || []
+      const jarAssets = assets.filter(a => a.name.endsWith('.jar'))
 
-    return results
-  } catch (err) {
-    console.error('Failed to fetch Kotatsu releases:', err)
-    return []
+      return jarAssets.map(asset => {
+        const nameWithoutExt = asset.name.replace(/\.jar$/, '')
+        const sizeMB = (asset.size / (1024 * 1024)).toFixed(1)
+
+        return {
+          _platform: 'kotatsu',
+          _repo: source.repo,
+          _repoUrl: source.repoUrl,
+          _autoInstall: '',
+          _allInOneAutoInstall: '',
+          _fileType: 'manga',
+          _manifestUrl: asset.browser_download_url,
+          _anymexType: 'manga',
+          _allTypes: ['manga'],
+
+          name: nameWithoutExt,
+          icon: 'https://raw.githubusercontent.com/kotatsuapp/kotatsu-android/master/app/src/main/ic_launcher-playstore.png',
+          language: 'Multi',
+          langBase: 'Multi',
+          languages: ['Multi'],
+          type: 'manga',
+          version: release.tag_name || '',
+          author: source.repo,
+
+          baseUrl: asset.browser_download_url,
+          fileSize: sizeMB,
+          jarUrl: asset.browser_download_url,
+        } as UnifiedExtension
+      })
+    } catch (err) {
+      console.error(`Failed to fetch Kotatsu releases from ${source.repo}:`, err)
+      return []
+    }
+  })
+
+  const results = await Promise.all(promises)
+  for (const exts of results) {
+    allResults.push(...exts)
   }
+
+  cachedKotatsu = allResults
+  cachedKotatsuAt = Date.now()
+
+  return allResults
 }
 
 // ============ MAIN FETCHER ============
