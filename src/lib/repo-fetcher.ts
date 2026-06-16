@@ -642,7 +642,7 @@ export async function fetchKotatsuReleases(forceRefresh = false): Promise<Unifie
 
         return {
           _platform: 'kotatsu',
-          _repo: source.repo,
+          _repo: nameWithoutExt,
           _repoUrl: source.repoUrl,
           _autoInstall: '',
           _allInOneAutoInstall: '',

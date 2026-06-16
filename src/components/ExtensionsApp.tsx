@@ -471,7 +471,7 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
             languages: [],
             autoInstall: ext._autoInstall || '',
             allInOneAutoInstall: ext._allInOneAutoInstall || '',
-            manualUrl: ext._repoUrl,
+            manualUrl: ext._platform === 'kotatsu' ? (ext._manifestUrl || ext._repoUrl) : ext._repoUrl,
             repoUrl: ext._repoUrl,
           }
         })
@@ -1007,8 +1007,12 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                       </div>
                       <div className="flex items-center justify-center gap-1.5 mb-1">
                         <span className="text-[11px] text-gray-500">{PLATFORM_LABELS[repo.platform]}</span>
-                        <span className="text-[11px] text-gray-600">·</span>
-                        <span className="text-[11px] text-gray-400">{repo.count} ext</span>
+                        {repo.platform !== 'kotatsu' && (
+                          <>
+                            <span className="text-[11px] text-gray-600">·</span>
+                            <span className="text-[11px] text-gray-400">{repo.count} ext</span>
+                          </>
+                        )}
                       </div>
                       <div className="text-[11px] text-gray-500 truncate w-full mb-0.5">
                         {repo.types.slice(0, 3).join(', ')}{repo.types.length > 3 ? ` +${repo.types.length - 3}` : ''}
@@ -1077,7 +1081,7 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                           </div>
                           <div className="min-w-0 flex-1">
                             <h3 className="text-sm font-medium text-white truncate" title={repo.repo}>{repo.repo}</h3>
-                            <span className="text-[11px] text-gray-600">{PLATFORM_LABELS[repo.platform]} · {repo.count} ext</span>
+                            <span className="text-[11px] text-gray-600">{PLATFORM_LABELS[repo.platform]}{repo.platform !== 'kotatsu' ? ` · ${repo.count} ext` : ''}</span>
                           </div>
                           <div className="flex items-center gap-1.5 flex-shrink-0 flex-wrap justify-end">
                             {isMangayomi && hasAllInOne ? (
