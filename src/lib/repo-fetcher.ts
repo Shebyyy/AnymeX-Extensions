@@ -600,6 +600,74 @@ function parseLNReaderFormat(data: unknown, config: RepoConfig): UnifiedExtensio
   return results
 }
 
+// ============ KOTATSU FETCHER ============
+
+let cachedKotatsu: UnifiedExtension[] | null = null
+let cachedKotatsuAt = 0
+const KOTATSU_CACHE_TTL = 30 * 60 * 1000
+
+export async function fetchKotatsuReleases(forceRefresh = false): Promise<UnifiedExtension[]> {
+  if (!forceRefresh && cachedKotatsu && Date.now() - cachedKotatsuAt < KOTATSU_CACHE_TTL) {
+    return cachedKotatsu
+  }
+
+  try {
+    const res = await fetch('https://api.github.com/repos/mochi-plugins/repository/releases/latest', {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      next: { revalidate: 3600 },
+    })
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+    const release = await res.json() as {
+      tag_name?: string
+      name?: string
+      published_at?: string
+      assets?: { name: string; browser_download_url: string; size: number }[]
+    }
+
+    const assets = release.assets || []
+    const jarAssets = assets.filter(a => a.name.endsWith('.jar'))
+
+    const results: UnifiedExtension[] = jarAssets.map(asset => {
+      const nameWithoutExt = asset.name.replace(/\.jar$/, '')
+      const sizeMB = (asset.size / (1024 * 1024)).toFixed(1)
+
+      return {
+        _platform: 'kotatsu',
+        _repo: 'mochi-plugins',
+        _repoUrl: 'https://github.com/mochi-plugins/repository',
+        _autoInstall: '',
+        _allInOneAutoInstall: '',
+        _fileType: 'manga',
+        _manifestUrl: asset.browser_download_url,
+        _anymexType: 'manga',
+        _allTypes: ['manga'],
+
+        name: nameWithoutExt,
+        icon: 'https://raw.githubusercontent.com/kotatsuapp/kotatsu-android/master/app/src/main/ic_launcher-playstore.png',
+        language: 'Multi',
+        langBase: 'Multi',
+        languages: ['Multi'],
+        type: 'manga',
+        version: release.tag_name || '',
+        author: 'mochi-plugins',
+
+        baseUrl: asset.browser_download_url,
+        fileSize: sizeMB,
+        jarUrl: asset.browser_download_url,
+      }
+    })
+
+    cachedKotatsu = results
+    cachedKotatsuAt = Date.now()
+
+    return results
+  } catch (err) {
+    console.error('Failed to fetch Kotatsu releases:', err)
+    return []
+  }
+}
+
 // ============ MAIN FETCHER ============
 
 let cachedExtensions: UnifiedExtension[] | null = null
@@ -650,6 +718,10 @@ export async function fetchAllExtensions(forceRefresh = false): Promise<UnifiedE
   for (const exts of results) {
     allExtensions.push(...exts)
   }
+
+  // Fetch Kotatsu JAR releases
+  const kotatsuExts = await fetchKotatsuReleases(forceRefresh)
+  allExtensions.push(...kotatsuExts)
 
   cachedExtensions = allExtensions
   cachedAt = Date.now()

@@ -63,6 +63,7 @@ const PLATFORM_COLORS: Record<string, string> = {
   mangayomi: 'bg-white/10 text-gray-300 border-white/20',
   cloudstream: 'bg-white/10 text-gray-300 border-white/20',
   lnreader: 'bg-white/10 text-gray-300 border-white/20',
+  kotatsu: 'bg-white/10 text-gray-300 border-white/20',
 }
 
 const PLATFORM_TEXT: Record<string, string> = {
@@ -72,11 +73,12 @@ const PLATFORM_TEXT: Record<string, string> = {
   mangayomi: 'text-gray-300',
   cloudstream: 'text-gray-300',
   lnreader: 'text-gray-300',
+  kotatsu: 'text-gray-300',
 }
 
 const PLATFORM_ACCENT: Record<string, string> = {
   sora: '#9ca3af', mihon: '#9ca3af', aniyomi: '#9ca3af',
-  mangayomi: '#9ca3af', cloudstream: '#9ca3af', lnreader: '#9ca3af',
+  mangayomi: '#9ca3af', cloudstream: '#9ca3af', lnreader: '#9ca3af', kotatsu: '#9ca3af',
 }
 
 const PLATFORM_LABELS: Record<string, string> = {
@@ -86,6 +88,7 @@ const PLATFORM_LABELS: Record<string, string> = {
   mangayomi: 'Mangayomi',
   cloudstream: 'CloudStream',
   lnreader: 'LNReader',
+  kotatsu: 'Kotatsu',
 }
 
 const PLATFORM_ICON: Record<string, string> = {
@@ -95,6 +98,7 @@ const PLATFORM_ICON: Record<string, string> = {
   mangayomi: 'https://raw.githubusercontent.com/kodjodevf/mangayomi/main/assets/app_icons/icon-red.png',
   cloudstream: 'https://static.everythingmoe.com/icons/cloudstream.png',
   lnreader: 'https://raw.githubusercontent.com/LNReader/lnreader/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
+  kotatsu: 'https://raw.githubusercontent.com/kotatsuapp/kotatsu-android/master/app/src/main/ic_launcher-playstore.png',
 }
 
 const TYPE_COLORS: Record<string, string> = {
@@ -885,7 +889,7 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                         {langs.slice(0, 3).join(', ')}{langs.length > 3 ? ` +${langs.length - 3}` : ''}
                       </div>
                       <div className="text-[10px] text-gray-600 truncate w-full mb-1">
-                        {ext._repo}{domain ? ` · ${domain}` : ''}{hasVersion ? ` · v${ext.version}` : ''}
+                        {ext._repo}{domain ? ` · ${domain}` : ''}{hasVersion ? ` · v${ext.version}` : ''}{typeof ext.fileSize === 'string' ? ` · ${ext.fileSize} MB` : ''}
                       </div>
                       <div className="mt-auto pt-1.5 w-full space-y-1">
                         {ext._autoInstall && (
@@ -944,7 +948,7 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                         </div>
                         <div className="flex items-center gap-2 mt-0.5 text-[11px]">
                           <span className="text-gray-600">Repo</span>
-                          <span className="text-gray-400 truncate">{ext._repo}{domain ? ` · ${domain}` : ''}</span>
+                          <span className="text-gray-400 truncate">{ext._repo}{domain ? ` · ${domain}` : ''}{typeof ext.fileSize === 'string' ? ` · ${ext.fileSize} MB` : ''}</span>
                         </div>
                         {manualUrl && (
                           <div className="flex justify-end mt-2">
@@ -1024,7 +1028,7 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                               </a>
                             ))}
                           </div>
-                        ) : repo.platform === 'sora' ? null : addRepoUrl ? (
+                        ) : (repo.platform === 'sora' || repo.platform === 'kotatsu') ? null : addRepoUrl ? (
                           <a href={addRepoUrl} className="inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-md text-[10px] font-semibold bg-white/[0.1] border border-white/[0.15] text-gray-200 hover:bg-white/[0.15] transition-all w-full">
                             <ExternalLink className="w-3 h-3" />Add Repo
                           </a>
@@ -1087,7 +1091,7 @@ export default function ExtensionsApp({ view }: { view: ViewMode }) {
                                   </a>
                                 ))}
                               </>
-                            ) : repo.platform === 'sora' ? null : addRepoUrl ? (
+                            ) : (repo.platform === 'sora' || repo.platform === 'kotatsu') ? null : addRepoUrl ? (
                               <a href={addRepoUrl} className="inline-flex items-center justify-center gap-1 py-1.5 px-3 rounded-lg text-[11px] font-semibold bg-white/[0.1] border border-white/[0.15] text-gray-200 hover:bg-white/[0.15] transition-all active:scale-[0.97] whitespace-nowrap">
                                 <ExternalLink className="w-3 h-3" />Add Repo
                               </a>

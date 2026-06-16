@@ -125,18 +125,19 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
         { label: 'Download Plugin', icon: <ArrowDown className="w-3.5 h-3.5" /> },
         { label: 'Restart App', icon: <RefreshCw className="w-3.5 h-3.5" /> },
       ],
-      instruction: 'Install the Runtime Bridge Plugin to unlock Aniyomi & CloudStream extensions.',
+      instruction: 'Install the Runtime Bridge Plugin to unlock Aniyomi, CloudStream & Kotatsu extensions.',
       details: (
         <div className="space-y-3">
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-violet-500/10 text-violet-400 border border-violet-500/20">Needed for Aniyomi</span>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-sky-500/10 text-sky-400 border border-sky-500/20">Needed for CloudStream</span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-orange-500/10 text-orange-400 border border-orange-500/20">Needed for Kotatsu</span>
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Not needed for Mangayomi/LNReader/Sora</span>
           </div>
 
         </div>
       ),
-      tip: 'After downloading & installing the plugin, restart the app. Once restarted, Aniyomi & CloudStream tabs will appear in your Extensions page.'
+      tip: 'After downloading & installing the plugin, restart the app. Once restarted, Aniyomi, CloudStream & Kotatsu tabs will appear in your Extensions page.'
     })
   }
 
