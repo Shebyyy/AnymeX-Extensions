@@ -652,7 +652,7 @@ export async function fetchKotatsuReleases(forceRefresh = false): Promise<Unifie
           _allTypes: ['manga'],
 
           name: nameWithoutExt,
-          icon: 'https://raw.githubusercontent.com/kotatsuapp/kotatsu-android/master/app/src/main/ic_launcher-playstore.png',
+          icon: 'https://raw.githubusercontent.com/KotatsuApp/Kotatsu/devel/metadata/en-US/icon.png',
           language: 'Multi',
           langBase: 'Multi',
           languages: ['Multi'],

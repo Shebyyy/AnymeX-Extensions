@@ -98,7 +98,7 @@ const PLATFORM_ICON: Record<string, string> = {
   mangayomi: 'https://raw.githubusercontent.com/kodjodevf/mangayomi/main/assets/app_icons/icon-red.png',
   cloudstream: 'https://static.everythingmoe.com/icons/cloudstream.png',
   lnreader: 'https://raw.githubusercontent.com/LNReader/lnreader/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
-  kotatsu: 'https://raw.githubusercontent.com/kotatsuapp/kotatsu-android/master/app/src/main/ic_launcher-playstore.png',
+  kotatsu: 'https://raw.githubusercontent.com/KotatsuApp/Kotatsu/devel/metadata/en-US/icon.png',
 }
 
 const TYPE_COLORS: Record<string, string> = {
