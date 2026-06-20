@@ -613,6 +613,8 @@ export async function fetchKotatsuReleases(forceRefresh = false): Promise<Unifie
 
   const KOTATSU_SOURCES = [
     { repo: 'mochi-plugins', url: 'https://api.github.com/repos/mochi-plugins/repository/releases/latest', repoUrl: 'https://github.com/mochi-plugins/repository' },
+    { repo: 'mochi-plugins', url: 'https://api.github.com/repos/dragonx943/manga-repo/releases/latest', repoUrl: 'https://github.com/dragonx943/manga-repo' },
+    { repo: 'mochi-plugins', url: 'https://api.github.com/repos/InvalidDavid/UMA/releases/latest', repoUrl: 'https://github.com/InvalidDavid/UMA' },
     { repo: 'multi-parsers', url: 'https://api.github.com/repos/Shebyyy/kotatsu-multi-parsers/releases/latest', repoUrl: 'https://github.com/Shebyyy/kotatsu-multi-parsers' },
   ]
 
