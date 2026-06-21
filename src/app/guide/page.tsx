@@ -240,7 +240,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
         </div>
       </div>
     ),
-    tip: 'Extensions auto-check for updates, so you don\'t need to manually update them.',
+    tip: 'Update notifications are not currently available. To update extensions, check the Extensions page and install available updates manually.',
   })
 
   steps.push({
