@@ -25,13 +25,27 @@ export const metadata: Metadata = {
     description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
     type: "website",
     url: "https://github.com/Shebyyy/AnymeX-Extensions",
-    images: ["/logo.png"],
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "AnymeX",
+      },
+    ],
   },
   twitter: {
     card: "summary",
     title: "AnymeX Extensions",
     description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
-    images: ["/logo.png"],
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "AnymeX",
+      },
+    ],
   },
   other: {
     "github:repo": "https://github.com/Shebyyy/AnymeX-Extensions",
