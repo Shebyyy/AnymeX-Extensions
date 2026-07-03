@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://anymex-ext.netlify.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://anymex-extensions.vercel.app'),
   title: "AnymeX Extensions",
   description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
   icons: {
@@ -25,6 +25,12 @@ export const metadata: Metadata = {
     description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
     type: "website",
     url: "https://github.com/Shebyyy/AnymeX-Extensions",
+    images: ["/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "AnymeX Extensions",
+    description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
     images: ["/logo.png"],
   },
   other: {
