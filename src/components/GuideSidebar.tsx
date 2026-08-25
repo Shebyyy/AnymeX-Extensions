@@ -8,6 +8,8 @@ import {
   Download,
   Menu,
   X,
+  Settings,
+  ChevronRight,
 } from 'lucide-react'
 
 const GUIDES = [
@@ -37,7 +39,7 @@ export default function GuideSidebar() {
 
   return (
     <>
-      {/* Sticky wrapper — sticks below header, button is positioned relative to content */}
+      {/* Sticky wrapper */}
       <div className="sticky top-14 z-30 h-0">
         <button
           onClick={() => setOpen(!open)}
@@ -86,6 +88,22 @@ export default function GuideSidebar() {
               </Link>
             )
           })}
+
+          {/* Settings section */}
+          <div className="pt-3 mt-2 border-t border-white/[0.06]">
+            <Link
+              href="/guides"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-gray-400 hover:text-gray-200 hover:bg-white/[0.03] border border-transparent transition-all"
+            >
+              <Settings className="w-4 h-4 flex-shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-medium truncate">Settings Guides</p>
+                <p className="text-[10px] text-gray-600 truncate">15 categories</p>
+              </div>
+              <ChevronRight className="w-3 h-3 flex-shrink-0 text-gray-600" />
+            </Link>
+          </div>
         </div>
       </aside>
     </>

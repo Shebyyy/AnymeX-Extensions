@@ -11,7 +11,9 @@ import {
   Smartphone,
   Monitor,
   Apple,
+  Settings,
 } from 'lucide-react'
+import { SETTINGS_CATEGORIES } from '@/lib/settings-data'
 
 const PLATFORM_ICONS: Record<string, { icon: React.ReactNode; label: string; color: string }> = {
   android: { icon: <Smartphone className="w-3 h-3" />, label: 'Android', color: 'text-emerald-400' },
@@ -174,6 +176,31 @@ function GuidesContent() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Settings Guides */}
+        <div className="mb-10">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Settings Guides</h2>
+          <p className="text-sm text-gray-400 mb-6">Detailed guides for every setting in AnymeX.</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {SETTINGS_CATEGORIES.map(cat => (
+              <Link
+                key={cat.slug}
+                href={`/guides/settings/${cat.slug}`}
+                className={`group flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all`}
+              >
+                <div className={`w-9 h-9 rounded-lg ${cat.bg} border ${cat.border} flex items-center justify-center ${cat.color} flex-shrink-0`}>
+                  <Settings className="w-4 h-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">{cat.name}</span>
+                  <p className="text-[10px] text-gray-500 truncate">{cat.description}</p>
+                </div>
+                <ChevronRight className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Extension Systems */}
