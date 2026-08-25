@@ -327,6 +327,21 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
               <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
             </a>
           )}
+          {platform !== 'ios' && (
+            <a
+              href="https://wotaku.wiki/ext/misc#kotatsu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+            >
+              <Package className="w-4 h-4 text-orange-400 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <span className="text-sm text-gray-300 group-hover:text-white">Kotatsu</span>
+                <p className="text-[10px] text-gray-600">Manga</p>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
+            </a>
+          )}
         </div>
         {platform === 'ios' && (
           <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">

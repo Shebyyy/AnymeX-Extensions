@@ -97,6 +97,16 @@ const EXT_SYSTEMS = [
     border: 'border-emerald-500/20',
     types: ['Anime'],
   },
+  {
+    name: 'Kotatsu',
+    description: 'Manga extensions',
+    url: 'https://wotaku.wiki/ext/misc#kotatsu',
+    icon: <Package className="w-4 h-4" />,
+    color: 'text-orange-400',
+    bg: 'bg-orange-500/10',
+    border: 'border-orange-500/20',
+    types: ['Manga'],
+  },
 ]
 
 // ============ MAIN COMPONENT ============
