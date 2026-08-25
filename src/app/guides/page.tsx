@@ -8,13 +8,16 @@ import {
   ExternalLink,
   ChevronRight,
   Shield,
-  Film,
-  BookText,
-  Layers,
   Smartphone,
-  Cloud,
-  Package,
+  Monitor,
+  Apple,
 } from 'lucide-react'
+
+const PLATFORM_ICONS: Record<string, { icon: React.ReactNode; label: string; color: string }> = {
+  android: { icon: <Smartphone className="w-3 h-3" />, label: 'Android', color: 'text-emerald-400' },
+  ios: { icon: <Apple className="w-3 h-3" />, label: 'iOS', color: 'text-gray-300' },
+  desktop: { icon: <Monitor className="w-3 h-3" />, label: 'Desktop', color: 'text-sky-400' },
+}
 
 // ============ GUIDE CARDS DATA ============
 
@@ -52,61 +55,55 @@ const EXT_SYSTEMS = [
     name: 'Aniyomi / Mihon',
     description: 'Aniyomi for anime & Mihon for manga',
     url: 'https://wotaku.wiki/ext/mihon',
-    icon: <Film className="w-4 h-4" />,
     color: 'text-violet-400',
     bg: 'bg-violet-500/10',
     border: 'border-violet-500/20',
-    types: ['Anime', 'Manga'],
+    platforms: ['android', 'desktop'],
   },
   {
     name: 'Mangayomi',
     description: 'Anime, manga & novel extensions',
     url: 'https://wotaku.wiki/ext/mangayomi',
-    icon: <Layers className="w-4 h-4" />,
     color: 'text-sky-400',
     bg: 'bg-sky-500/10',
     border: 'border-sky-500/20',
-    types: ['Anime', 'Manga', 'Novel'],
+    platforms: ['android', 'ios', 'desktop'],
   },
   {
     name: 'LNReader',
     description: 'Novel extensions (goes under Mangayomi Novel in AnymeX)',
     url: 'https://wotaku.wiki/ext/misc#lnreader',
-    icon: <BookText className="w-4 h-4" />,
     color: 'text-amber-400',
     bg: 'bg-amber-500/10',
     border: 'border-amber-500/20',
-    types: ['Novel'],
+    platforms: ['android', 'ios', 'desktop'],
   },
   {
     name: 'Sora',
     description: 'Anime, manga & novel extensions',
     url: 'https://wotaku.wiki/ext/ios#sora',
-    icon: <Smartphone className="w-4 h-4" />,
     color: 'text-gray-300',
     bg: 'bg-gray-500/10',
     border: 'border-gray-500/20',
-    types: ['Anime', 'Manga', 'Novel'],
+    platforms: ['android', 'ios', 'desktop'],
   },
   {
     name: 'CloudStream',
     description: 'Anime extensions',
     url: 'https://wotaku.wiki/ext/misc#cloudstream',
-    icon: <Cloud className="w-4 h-4" />,
     color: 'text-emerald-400',
     bg: 'bg-emerald-500/10',
     border: 'border-emerald-500/20',
-    types: ['Anime'],
+    platforms: ['android', 'desktop'],
   },
   {
     name: 'Kotatsu',
     description: 'Manga extensions',
     url: 'https://wotaku.wiki/ext/misc#kotatsu',
-    icon: <Package className="w-4 h-4" />,
     color: 'text-orange-400',
     bg: 'bg-orange-500/10',
     border: 'border-orange-500/20',
-    types: ['Manga'],
+    platforms: ['android', 'desktop'],
   },
 ]
 
@@ -191,16 +188,27 @@ function GuidesContent() {
                 href={sys.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border ${sys.border} hover:bg-white/[0.06] hover:border-opacity-60 transition-all`}
+                className={`group flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border ${sys.border} hover:bg-white/[0.06] hover:border-opacity-60 transition-all`}
               >
-                <div className={`w-8 h-8 rounded-lg ${sys.bg} border ${sys.border} flex items-center justify-center ${sys.color} group-hover:scale-110 transition-transform`}>
-                  {sys.icon}
-                </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">{sys.name}</span>
                   <span className="text-[10px] text-gray-500">{sys.description}</span>
                 </div>
-                <ExternalLink className={`w-3.5 h-3.5 ${sys.color} opacity-0 group-hover:opacity-100 transition-opacity ml-1 flex-shrink-0`} />
+                <div className="flex items-center gap-1 ml-1">
+                  {sys.platforms.map(p => {
+                    const plat = PLATFORM_ICONS[p]
+                    return (
+                      <span
+                        key={p}
+                        title={plat.label}
+                        className={`w-6 h-6 rounded-md bg-white/5 border border-white/[0.08] flex items-center justify-center ${plat.color}`}
+                      >
+                        {plat.icon}
+                      </span>
+                    )
+                  })}
+                </div>
+                <ExternalLink className={`w-3 h-3 ${sys.color} opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0`} />
               </a>
             ))}
           </div>
