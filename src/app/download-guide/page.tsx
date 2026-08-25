@@ -14,10 +14,6 @@ import {
   CheckCircle2,
   ChevronRight,
   ListChecks,
-  Smartphone,
-  Package,
-  Copy,
-  ExternalLink,
   RefreshCw,
   CircleDot,
   Shield,
@@ -27,8 +23,6 @@ import {
   Layers,
   Globe,
   SlidersHorizontal,
-  Wifi,
-  RotateCcw,
   Check,
 } from 'lucide-react'
 import GuideSidebar from '@/components/GuideSidebar'
@@ -269,19 +263,11 @@ function DownloadGuideContent() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="AnymeX" className="w-7 h-7 rounded-lg object-contain" />
-              <Link href="/extensions" className="text-base sm:text-lg font-semibold text-gray-100 hover:text-white transition-colors">
-                AnymeX Extensions
+              <Link href="/guides" className="text-base sm:text-lg font-semibold text-gray-100 hover:text-white transition-colors">
+                AnymeX Guides
               </Link>
             </div>
             <div className="flex items-center gap-1.5">
-              <Link href="/extensions" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
-                <Package className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Extensions</span>
-              </Link>
-              <Link href="/repos" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
-                <Copy className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Repos</span>
-              </Link>
               <Link href="/guides" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-white bg-white/10 border border-white/20 transition-all">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Guides</span>
@@ -384,36 +370,14 @@ function DownloadGuideContent() {
           ))}
         </div>
 
-        {/* Quick Links */}
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Link href="/extensions" className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all group">
-            <Package className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-            <div>
-              <p className="text-sm font-semibold text-gray-200 group-hover:text-white">Browse Extensions</p>
-              <p className="text-xs text-gray-500">Find and install extensions</p>
-            </div>
-            <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />
-          </Link>
-          <Link href="/guide" className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all group">
-            <BookOpen className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-            <div>
-              <p className="text-sm font-semibold text-gray-200 group-hover:text-white">Setup Guide</p>
-              <p className="text-xs text-gray-500">How to set up AnymeX</p>
-            </div>
-            <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />
-          </Link>
-        </div>
+
       </main>
 
       {/* Footer */}
       <footer className="mt-auto border-t border-white/5 bg-[#0a0a0f]/80">
         <div className="px-4 sm:px-6 py-4 max-w-4xl mx-auto w-full flex items-center justify-between">
           <span className="text-xs text-gray-700">AnymeX Download Guide</span>
-          <div className="flex items-center gap-3">
-            <Link href="/extensions" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Extensions</Link>
-            <Link href="/repos" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Repos</Link>
-            <Link href="/guides" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Guides</Link>
-          </div>
+          <Link href="/guides" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Guides</Link>
         </div>
       </footer>
     </div>

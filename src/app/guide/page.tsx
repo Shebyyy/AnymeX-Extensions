@@ -19,8 +19,6 @@ import {
   Settings,
   RefreshCw,
   ArrowDown,
-  MousePointerClick,
-  ClipboardList,
   Film,
   Tv2,
   CheckCircle2,
@@ -240,7 +238,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
 
   steps.push({
     id: 'add-repo',
-    title: 'Add Repository',
+    title: 'Browse Extensions',
     icon: <Copy className="w-5 h-5" />,
     breadcrumbs: [
       { label: 'Profile', icon: <User className="w-3.5 h-3.5" /> },
@@ -251,48 +249,89 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
       { label: 'Paste URL' },
       { label: 'Add Repository' },
     ],
-    instruction: 'Add extension repos to AnymeX so you can browse and install extensions.',
+    instruction: 'Find extension repos from the wiki and add them to AnymeX.',
     details: (
       <div className="space-y-3">
-        {/* Two methods */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {/* Method 1: One-click */}
-          <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
-            <div className="flex items-center gap-2 mb-2">
-              <MousePointerClick className="w-4 h-4 text-emerald-400" />
-              <span className="text-sm font-semibold text-emerald-300">One-Click</span>
-            </div>
-            <p className="text-xs text-gray-400">On this site, tap <strong className="text-emerald-400">Install</strong> or <strong className="text-emerald-400">Add Repo</strong>. AnymeX opens and adds it automatically.</p>
-            <div className="mt-2 text-xs text-gray-500">
-              {platform === 'android' ? (
-                <span>Works for <strong className="text-gray-300">all systems</strong> on Android.</span>
-              ) : platform === 'ios' ? (
-                <span>Works for <strong className="text-gray-300">Mangayomi & LNReader</strong> on iOS. Use Manual for Sora.</span>
-              ) : (
-                <span>Works for <strong className="text-gray-300">Mangayomi & LNReader</strong>. Use Manual for others.</span>
-              )}
-            </div>
-          </div>
-
-          {/* Method 2: Manual */}
-          <div className="p-4 rounded-lg bg-amber-500/5 border border-amber-500/15">
-            <div className="flex items-center gap-2 mb-2">
-              <ClipboardList className="w-4 h-4 text-amber-400" />
-              <span className="text-sm font-semibold text-amber-300">Manual</span>
-            </div>
-            <p className="text-xs text-gray-400">Copy the repo URL from this site, then paste it inside AnymeX.</p>
-            <div className="mt-2">
-              <Link href="/repos" className="inline-flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 transition-colors">
-                <Copy className="w-3 h-3" /> Browse & copy repos
-              </Link>
-            </div>
-          </div>
+        <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+          <p className="text-xs text-gray-400">
+            Visit the wiki pages below to find available extensions and their repository URLs. Add repos in AnymeX via <strong className="text-white">Profile → Settings → Extensions → Select System → + Add Repo</strong>.
+          </p>
         </div>
-
+        <div className="space-y-2">
+          {platform !== 'ios' && (
+            <a
+              href="https://wotaku.wiki/ext/mihon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+            >
+              <Film className="w-4 h-4 text-violet-400 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <span className="text-sm text-gray-300 group-hover:text-white">Aniyomi / Mihon</span>
+                <p className="text-[10px] text-gray-600">Anime (Aniyomi) &amp; Manga (Mihon)</p>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
+            </a>
+          )}
+          <a
+            href="https://wotaku.wiki/ext/mangayomi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+          >
+            <Tv2 className="w-4 h-4 text-sky-400 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <span className="text-sm text-gray-300 group-hover:text-white">Mangayomi</span>
+              <p className="text-[10px] text-gray-600">Anime, Manga &amp; Novel</p>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
+          </a>
+          <a
+            href="https://wotaku.wiki/ext/misc#lnreader"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+          >
+            <BookOpen className="w-4 h-4 text-amber-400 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <span className="text-sm text-gray-300 group-hover:text-white">LNReader</span>
+              <p className="text-[10px] text-gray-600">Novel (under Mangayomi Novel in AnymeX)</p>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
+          </a>
+          <a
+            href="https://wotaku.wiki/ext/ios#sora"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+          >
+            <Smartphone className="w-4 h-4 text-gray-300 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <span className="text-sm text-gray-300 group-hover:text-white">Sora</span>
+              <p className="text-[10px] text-gray-600">Anime, Manga &amp; Novel</p>
+            </div>
+            <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
+          </a>
+          {platform !== 'ios' && (
+            <a
+              href="https://wotaku.wiki/ext/misc#cloudstream"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-3 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.14] transition-all group"
+            >
+              <Globe className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <span className="text-sm text-gray-300 group-hover:text-white">CloudStream</span>
+                <p className="text-[10px] text-gray-600">Anime</p>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-gray-400" />
+            </a>
+          )}
+        </div>
         {platform === 'ios' && (
           <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
             <p className="text-xs text-gray-400">
-              <strong className="text-white">iOS note:</strong> Only <strong className="text-emerald-400">Mangayomi</strong>, <strong className="text-emerald-400">LNReader</strong> & <strong className="text-amber-400">Sora</strong> repos work on iOS. Aniyomi & CloudStream are not available.
+              <strong className="text-white">iOS note:</strong> Only <strong className="text-sky-400">Mangayomi</strong>, <strong className="text-amber-400">LNReader</strong> &amp; <strong className="text-gray-300">Sora</strong> repos work on iOS. Aniyomi &amp; CloudStream are not available.
             </p>
           </div>
         )}
@@ -337,7 +376,7 @@ function getSteps(platform: Platform, useBeta: boolean): Step[] {
         </div>
       </div>
     ),
-    tip: 'Update notifications are not currently available. To update extensions, check the Extensions page and install available updates manually.',
+    tip: 'Update notifications are not currently available. To update extensions, revisit the wiki pages and re-add the repo to get the latest versions.',
   })
 
   steps.push({
@@ -473,25 +512,11 @@ function GuideContent() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="AnymeX" className="w-7 h-7 rounded-lg object-contain" />
-              <Link href="/extensions" className="text-base sm:text-lg font-semibold text-gray-100 hover:text-white transition-colors">
-                AnymeX Extensions
+              <Link href="/guides" className="text-base sm:text-lg font-semibold text-gray-100 hover:text-white transition-colors">
+                AnymeX Guides
               </Link>
             </div>
             <div className="flex items-center gap-2">
-              <Link
-                href="/extensions"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
-              >
-                <Package className="w-4 h-4" />
-                <span className="hidden sm:inline">Extensions</span>
-              </Link>
-              <Link
-                href="/repos"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-gray-500 hover:text-gray-300 transition-all"
-              >
-                <Copy className="w-4 h-4" />
-                <span className="hidden sm:inline">Repos</span>
-              </Link>
               <Link
                 href="/guides"
                 className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-white bg-white/10 border border-white/20 transition-all"
@@ -702,30 +727,6 @@ function GuideContent() {
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <Link href="/extensions" className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.1] transition-all group">
-            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <Package className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Browse Extensions</p>
-              <p className="text-xs text-gray-500">Find and install extensions</p>
-            </div>
-            <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />
-          </Link>
-          <Link href="/repos" className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.1] transition-all group">
-            <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <Copy className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">Browse Repos</p>
-              <p className="text-xs text-gray-500">Copy repo URLs to add manually</p>
-            </div>
-            <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />
-          </Link>
-        </div>
-
         {/* Platform Specific Notes */}
         {selectedPlatform === 'ios' && (
           <div className="mt-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
@@ -893,11 +894,8 @@ function GuideContent() {
       {/* Footer */}
       <footer className="mt-auto border-t border-white/5 bg-[#0a0a0f]/80">
         <div className="px-4 sm:px-6 py-4 max-w-4xl mx-auto w-full flex items-center justify-between">
-          <span className="text-xs text-gray-700">AnymeX Extension Guide</span>
-          <div className="flex items-center gap-3">
-            <Link href="/extensions" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Extensions</Link>
-            <Link href="/repos" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Repos</Link>
-          </div>
+          <span className="text-xs text-gray-700">AnymeX Guide</span>
+          <Link href="/guides" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Guides</Link>
         </div>
       </footer>
     </div>

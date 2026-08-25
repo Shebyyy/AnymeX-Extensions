@@ -5,10 +5,14 @@ import Link from 'next/link'
 import {
   Download,
   BookOpen,
-  Package,
-  Copy,
+  ExternalLink,
   ChevronRight,
   Shield,
+  Film,
+  BookText,
+  Layers,
+  Smartphone,
+  Cloud,
 } from 'lucide-react'
 
 // ============ GUIDE CARDS DATA ============
@@ -40,6 +44,61 @@ const GUIDES = [
   },
 ]
 
+// ============ EXTENSION SYSTEMS DATA ============
+
+const EXT_SYSTEMS = [
+  {
+    name: 'Aniyomi / Mihon',
+    description: 'Aniyomi for anime & Mihon for manga',
+    url: 'https://wotaku.wiki/ext/mihon',
+    icon: <Film className="w-4 h-4" />,
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/20',
+    types: ['Anime', 'Manga'],
+  },
+  {
+    name: 'Mangayomi',
+    description: 'Anime, manga & novel extensions',
+    url: 'https://wotaku.wiki/ext/mangayomi',
+    icon: <Layers className="w-4 h-4" />,
+    color: 'text-sky-400',
+    bg: 'bg-sky-500/10',
+    border: 'border-sky-500/20',
+    types: ['Anime', 'Manga', 'Novel'],
+  },
+  {
+    name: 'LNReader',
+    description: 'Novel extensions (goes under Mangayomi Novel in AnymeX)',
+    url: 'https://wotaku.wiki/ext/misc#lnreader',
+    icon: <BookText className="w-4 h-4" />,
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/20',
+    types: ['Novel'],
+  },
+  {
+    name: 'Sora',
+    description: 'Anime, manga & novel extensions for iOS',
+    url: 'https://wotaku.wiki/ext/ios#sora',
+    icon: <Smartphone className="w-4 h-4" />,
+    color: 'text-gray-300',
+    bg: 'bg-gray-500/10',
+    border: 'border-gray-500/20',
+    types: ['Anime', 'Manga', 'Novel'],
+  },
+  {
+    name: 'CloudStream',
+    description: 'Anime extensions',
+    url: 'https://wotaku.wiki/ext/misc#cloudstream',
+    icon: <Cloud className="w-4 h-4" />,
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/20',
+    types: ['Anime'],
+  },
+]
+
 // ============ MAIN COMPONENT ============
 
 function GuidesContent() {
@@ -51,24 +110,14 @@ function GuidesContent() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img src="/logo.png" alt="AnymeX" className="w-7 h-7 rounded-lg object-contain" />
-              <Link href="/extensions" className="text-base sm:text-lg font-semibold text-gray-100 hover:text-white transition-colors">
-                AnymeX Extensions
+              <Link href="/guides" className="text-base sm:text-lg font-semibold text-gray-100 hover:text-white transition-colors">
+                AnymeX Guides
               </Link>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Link href="/extensions" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
-                <Package className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Extensions</span>
-              </Link>
-              <Link href="/repos" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-gray-500 hover:text-gray-300 transition-all">
-                <Copy className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Repos</span>
-              </Link>
-              <Link href="/guides" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-white bg-white/10 border border-white/20 transition-all">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Guides</span>
-              </Link>
-            </div>
+            <Link href="/guides" className="inline-flex items-center gap-1 px-2 py-1.5 rounded-md text-[11px] font-medium text-white bg-white/10 border border-white/20 transition-all">
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Guides</span>
+            </Link>
           </div>
         </div>
       </header>
@@ -81,7 +130,7 @@ function GuidesContent() {
         </div>
 
         {/* Guide Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
           {GUIDES.map(guide => (
             <Link
               key={guide.id}
@@ -119,8 +168,44 @@ function GuidesContent() {
           ))}
         </div>
 
+        {/* Extension Systems */}
+        <div className="mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Extension Systems</h2>
+          <p className="text-sm text-gray-400 mb-6">Browse extension documentation for each system supported by AnymeX.</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {EXT_SYSTEMS.map(sys => (
+              <a
+                key={sys.name}
+                href={sys.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group flex flex-col p-4 sm:p-5 rounded-xl bg-white/[0.02] border ${sys.border} hover:border-opacity-40 hover:bg-white/[0.04] transition-all`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`w-9 h-9 rounded-lg ${sys.bg} border ${sys.border} flex items-center justify-center ${sys.color} group-hover:scale-110 transition-transform`}>
+                    {sys.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-bold text-white">{sys.name}</h3>
+                    <p className="text-xs text-gray-500">{sys.description}</p>
+                  </div>
+                  <ExternalLink className={`w-4 h-4 ${sys.color} opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0`} />
+                </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  {sys.types.map(type => (
+                    <span key={type} className={`px-2 py-0.5 rounded text-[10px] font-medium ${sys.bg} ${sys.color} border ${sys.border}`}>
+                      {type}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
         {/* Quick tip */}
-        <div className="mt-8 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+        <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/[0.08] flex items-center justify-center flex-shrink-0">
               <Shield className="w-4 h-4 text-gray-400" />
@@ -137,10 +222,7 @@ function GuidesContent() {
       <footer className="mt-auto border-t border-white/5 bg-[#0a0a0f]/80">
         <div className="px-4 sm:px-6 py-4 max-w-4xl mx-auto w-full flex items-center justify-between">
           <span className="text-xs text-gray-700">AnymeX Guides</span>
-          <div className="flex items-center gap-3">
-            <Link href="/extensions" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Extensions</Link>
-            <Link href="/repos" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Repos</Link>
-          </div>
+          <Link href="/guides" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">Guides</Link>
         </div>
       </footer>
     </div>

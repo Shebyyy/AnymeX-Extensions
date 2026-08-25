@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://anymex-extensions.vercel.app'),
-  title: "AnymeX Extensions",
-  description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
+  title: "AnymeX Guides",
+  description: "Guides to help you set up and use AnymeX — install, configure, and start watching/reading.",
   icons: {
     icon: "/logo.png",
   },
   openGraph: {
-    title: "AnymeX Extensions",
-    description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
+    title: "AnymeX Guides",
+    description: "Guides to help you set up and use AnymeX — install, configure, and start watching/reading.",
     type: "website",
     url: "https://github.com/Shebyyy/AnymeX-Extensions",
     images: [
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "AnymeX Extensions",
-    description: "Browse and install extensions for AnymeX — all platforms, all repos, one place",
+    title: "AnymeX Guides",
+    description: "Guides to help you set up and use AnymeX — install, configure, and start watching/reading.",
     images: [
       {
         url: "/logo.png",
@@ -63,7 +63,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0a0f] text-gray-100`}
       >
         {children}
-        <Toaster />
+
       </body>
     </html>
   );
