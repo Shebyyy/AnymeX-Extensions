@@ -13,6 +13,7 @@ import {
   Layers,
   Smartphone,
   Cloud,
+  Package,
 } from 'lucide-react'
 
 // ============ GUIDE CARDS DATA ============
@@ -79,7 +80,7 @@ const EXT_SYSTEMS = [
   },
   {
     name: 'Sora',
-    description: 'Anime, manga & novel extensions for iOS',
+    description: 'Anime, manga & novel extensions',
     url: 'https://wotaku.wiki/ext/ios#sora',
     icon: <Smartphone className="w-4 h-4" />,
     color: 'text-gray-300',
@@ -183,32 +184,23 @@ function GuidesContent() {
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Extension Systems</h2>
           <p className="text-sm text-gray-400 mb-6">Browse extension documentation for each system supported by AnymeX.</p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="flex flex-wrap gap-3">
             {EXT_SYSTEMS.map(sys => (
               <a
                 key={sys.name}
                 href={sys.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex flex-col p-4 sm:p-5 rounded-xl bg-white/[0.02] border ${sys.border} hover:border-opacity-40 hover:bg-white/[0.04] transition-all`}
+                className={`group flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border ${sys.border} hover:bg-white/[0.06] hover:border-opacity-60 transition-all`}
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className={`w-9 h-9 rounded-lg ${sys.bg} border ${sys.border} flex items-center justify-center ${sys.color} group-hover:scale-110 transition-transform`}>
-                    {sys.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-bold text-white">{sys.name}</h3>
-                    <p className="text-xs text-gray-500">{sys.description}</p>
-                  </div>
-                  <ExternalLink className={`w-4 h-4 ${sys.color} opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0`} />
+                <div className={`w-8 h-8 rounded-lg ${sys.bg} border ${sys.border} flex items-center justify-center ${sys.color} group-hover:scale-110 transition-transform`}>
+                  {sys.icon}
                 </div>
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  {sys.types.map(type => (
-                    <span key={type} className={`px-2 py-0.5 rounded text-[10px] font-medium ${sys.bg} ${sys.color} border ${sys.border}`}>
-                      {type}
-                    </span>
-                  ))}
+                <div className="flex flex-col min-w-0">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-200 group-hover:text-white transition-colors">{sys.name}</span>
+                  <span className="text-[10px] text-gray-500">{sys.description}</span>
                 </div>
+                <ExternalLink className={`w-3.5 h-3.5 ${sys.color} opacity-0 group-hover:opacity-100 transition-opacity ml-1 flex-shrink-0`} />
               </a>
             ))}
           </div>
